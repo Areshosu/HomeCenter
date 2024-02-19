@@ -5,6 +5,9 @@
  */
 package Pages;
 
+
+import Pages.Technician.TechnicianPage;
+import Pages.Customer.CustomerPage;
 import Models.Database;
 import Models.User;
 import java.awt.BorderLayout;
@@ -36,6 +39,9 @@ public class MainMenuPage implements ActionListener {
     JComboBox roleField;
     Button login, register, exit;
     
+    public static CustomerPage customerPage;
+    public static TechnicianPage technicianPage;
+    
     public void actionPerformed(ActionEvent e) {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
@@ -48,7 +54,16 @@ public class MainMenuPage implements ActionListener {
             if (user != null && user.getPassword().equals(password) && user.getRole().equals(selectedRole)) { 
                 JOptionPane.showMessageDialog(login, "Success");
                 usernameField.setText("");
-                passwordField.setText("");                
+                passwordField.setText("");    
+                if (selectedRole == "customer"){
+                    customerPage = new CustomerPage();
+                    customerPage.setVisible(true);
+                    container.setVisible(false);
+                }else if (selectedRole == "technician"){
+                    technicianPage = new TechnicianPage();
+                    technicianPage.setVisible(true);
+                    container.setVisible(false);
+                }
             } else {
                 JOptionPane.showMessageDialog(login, "Invalid username or password");
             }
