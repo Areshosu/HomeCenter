@@ -1,9 +1,9 @@
-yyhao0422
-1q2w3E*
-0
-null
-null
-customer
+New User :D
+123
+60123456789
+alex@gmail.com
+
+manager
 
 yyyhao0422
 1q2w3E*
@@ -18,4 +18,11 @@ aaa
 null
 null
 technician
+
+New User :D
+aaa
+60123456789
+yyh@gmail.com
+
+customer
 

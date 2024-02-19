@@ -39,7 +39,7 @@ public class Database {
                 if (dbname == "users") {
                     String userName = input.nextLine();
                     String password = input.nextLine();
-                    int phoneNumber = Integer.parseInt(input.nextLine());
+                    String phoneNumber = input.nextLine();
                     String emailAddress = input.nextLine();
                     String homeAddress = input.nextLine();
                     String role = input.nextLine();
@@ -76,9 +76,14 @@ public class Database {
         return System.getProperty("user.dir") + "/src/" + dirPrefix;
     }
     
-    public static User findUser(String name) {
+    public static User[] getUsers() {
+        User[] arrayUser = new User[] {};
+        return users.toArray(arrayUser);
+    }
+    
+    public static User findUser(String email) {
         for (User user: users) {
-            if (user.getUserName().equals(name)) {
+            if (user.getEmailAddress().equals(email)) {
                 return user;
             }
         }

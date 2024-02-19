@@ -12,7 +12,7 @@ package Models;
 public class User {
     private String userName;
     private String password;
-    private int phoneNumber;
+    private String phoneNumber;
     private String emailAddress;
     private String homeAddress;
     private String role;
@@ -25,7 +25,7 @@ public class User {
     
     public User(String userName,
                     String password,
-                    int phoneNumber,
+                    String phoneNumber,
                     String emailAddress,
                     String homeAddress,
                     String role) {
@@ -53,11 +53,11 @@ public class User {
         this.password = password;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
