@@ -45,7 +45,7 @@ public class MainMenuPage implements ActionListener {
         if (e.getSource() == exit) {
             System.exit(0);
         } else if (e.getSource() == login) {
-            if (user != null && user.getPassword().equals(password) && user.getRole().equals(selectedRole)) {
+            if (user != null && user.getPassword().equals(password) && user.getRole().equals(selectedRole)) { 
                 JOptionPane.showMessageDialog(login, "Success");
                 usernameField.setText("");
                 passwordField.setText("");                
