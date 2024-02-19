@@ -5,8 +5,10 @@
  */
 package Pages;
 
+import Helper.SharedHelper;
 import Models.Database;
 import Models.User;
+import Pages.Manager.ManagerPage;
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Dimension;
@@ -30,40 +32,44 @@ import javax.swing.border.TitledBorder;
 public class MainMenuPage implements ActionListener {
     JFrame container;
     JPanel panel;
-    JLabel usernameLabel, passwordLabel, roleLabel;
-    JTextField usernameField;
+    JLabel emailLabel, passwordLabel, roleLabel;
+    JTextField emailField;
     JPasswordField passwordField;
     JComboBox roleField;
     Button login, register, exit;
     
     public void actionPerformed(ActionEvent e) {
-        String username = usernameField.getText();
+        String email = emailField.getText();
         String password = new String(passwordField.getPassword());
         String selectedRole = roleField.getSelectedItem().toString();
-        User user = Database.findUser(username);
+        User user = Database.findUser(email);
             
         if (e.getSource() == exit) {
             System.exit(0);
         } else if (e.getSource() == login) {
             if (user != null && user.getPassword().equals(password) && user.getRole().equals(selectedRole)) { 
                 JOptionPane.showMessageDialog(login, "Success");
-                usernameField.setText("");
-                passwordField.setText("");                
+                emailField.setText("");
+                passwordField.setText("");
+                if (selectedRole.equals("manager")) {
+                    ManagerPage managerPage = new ManagerPage();
+                    managerPage.setVisible(true);
+                }
             } else {
-                JOptionPane.showMessageDialog(login, "Invalid username or password");
+                JOptionPane.showMessageDialog(login, "Invalid email or password");
             }
         } else if (e.getSource() == register) {
             if (user != null) {
-                JOptionPane.showMessageDialog(login, "please select other name.");
+                JOptionPane.showMessageDialog(login, "please use other email.");
                 return;
-            } else if (username.length() < 1 || password.length() < 1) {
-                JOptionPane.showMessageDialog(register, "Please input valid username and password");
+            } else if (!SharedHelper.isValidEmail(email) || password.length() < 1) {
+                JOptionPane.showMessageDialog(register, "Please input valid email and password");
             }
             else {
-                Database.addUser(new User(username, password, 0, null, null, selectedRole));
+                Database.addUser(new User("New User :D", password, "60123456789", email, "", selectedRole));
                 Database.writeToUsers();
                 JOptionPane.showMessageDialog(register, "Successfully registered (Please complete personal details in settings.)");
-                usernameField.setText("");
+                emailField.setText("");
                 passwordField.setText("");
                 return;
             }
@@ -90,19 +96,19 @@ public class MainMenuPage implements ActionListener {
         exit = new Button("Exit");
         exit.setPreferredSize(new Dimension(60, 30));
         exit.addActionListener(this);
-        usernameLabel = new JLabel("username: ");
+        emailLabel = new JLabel("email: ");
         passwordLabel = new JLabel("password: ");
         roleLabel = new JLabel("login as selected role: ");
-        usernameField = new JTextField(20);
-        usernameField.setPreferredSize(new Dimension(100, 30));
+        emailField = new JTextField(20);
+        emailField.setPreferredSize(new Dimension(100, 30));
         passwordField = new JPasswordField(20);
         passwordField.setPreferredSize(new Dimension(100, 30));
         roleField = new JComboBox(User.getRoles());
         roleField.setPreferredSize(new Dimension(200, 30));
         
         container.setLayout(new BorderLayout());
-        panel.add(usernameLabel);
-        panel.add(usernameField);
+        panel.add(emailLabel);
+        panel.add(emailField);
         panel.add(passwordLabel);
         panel.add(passwordField);
         panel.add(roleLabel);
