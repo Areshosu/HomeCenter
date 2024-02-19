@@ -52,16 +52,16 @@ public class Database {
                 } else if (dbname == "payments") {
                     double amount = Double.parseDouble(input.nextLine());
                     String paymentOption = input.nextLine();
-                    String senderName = input.nextLine();
-                    String receiverName = input.nextLine();
-                    payments.add(new Payment(amount, paymentOption, senderName, receiverName));
+                    String senderEmail = input.nextLine();
+                    String receiverEmail = input.nextLine();
+                    payments.add(new Payment(amount, paymentOption, senderEmail, receiverEmail));
                 } else if (dbname == "feedbacks") {
-                    String senderName = input.nextLine();
-                    String receiverName = input.nextLine();
+                    String senderEmail = input.nextLine();
+                    String receiverEmail = input.nextLine();
                     LocalDateTime createdDate = LocalDateTime.parse(input.nextLine());
                     double rating = Double.parseDouble(input.nextLine());
                     String message = input.nextLine();
-                    feedbacks.add(new Feedback(senderName, receiverName, createdDate, rating, message));
+                    feedbacks.add(new Feedback(senderEmail, receiverEmail, createdDate, rating, message));
                 }
                 input.nextLine();
             }
@@ -92,6 +92,25 @@ public class Database {
     
     public static void addUser(User user) {
         users.add(user);
+    }
+    
+    public static void updateOrCreateUser(User user) {
+        boolean userExisted = false;
+        for (User updatingUser: users) {
+            if (updatingUser.getEmailAddress().equals(user.getEmailAddress())) {
+                userExisted = true;
+                updatingUser.setUserName(user.getUserName());
+                updatingUser.setPassword(user.getPassword());
+                updatingUser.setPhoneNumber(user.getPhoneNumber());
+                updatingUser.setHomeAddress(user.getHomeAddress());
+                updatingUser.setRole(user.getRole());
+                break;
+            }
+        }
+        
+        if (!userExisted) {
+            users.add(user);
+        }
     }
     
     public static void removeUser(String username) {
