@@ -58,7 +58,7 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="215" pref="485" max="32767" attributes="0"/>
+                      <EmptySpace min="215" pref="487" max="32767" attributes="0"/>
                       <Component id="userListingLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -212,7 +212,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="emailLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Email (note: creates new user if not exist)"/>
+        <Property name="text" type="java.lang.String" value="Email "/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>

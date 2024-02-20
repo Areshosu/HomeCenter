@@ -98,23 +98,8 @@ public class Database {
         users.add(user);
     }
     
-    public static void updateOrCreateUser(User user) {
-        boolean userExisted = false;
-        for (User updatingUser: users) {
-            if (updatingUser.getEmailAddress().equals(user.getEmailAddress())) {
-                userExisted = true;
-                updatingUser.setUserName(user.getUserName());
-                updatingUser.setPassword(user.getPassword());
-                updatingUser.setPhoneNumber(user.getPhoneNumber());
-                updatingUser.setHomeAddress(user.getHomeAddress());
-                updatingUser.setRole(user.getRole());
-                break;
-            }
-        }
-        
-        if (!userExisted) {
-            users.add(user);
-        }
+    public static void updateUser(User user, int index) {
+        users.set(index, user);
     }
     
     public static void removeUser(String username) {
