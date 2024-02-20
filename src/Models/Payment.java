@@ -10,7 +10,7 @@ package Models;
  * @author sphal
  */
 public class Payment {
-    private static String[] paymentOptions = {
+    private static final String[] paymentOptions = {
         "Paypal",
         "Online banking fpx",
         "AloyPay",

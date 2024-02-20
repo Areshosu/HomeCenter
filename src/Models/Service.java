@@ -16,7 +16,7 @@ public class Service {
     private double price;
     private String serviceArea;
     
-    private static String[] areas = {
+    private static final String[] areas = {
         "Kuala Lumpur",
         "Ipoh",
         "Malacca",

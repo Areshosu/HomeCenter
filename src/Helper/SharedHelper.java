@@ -5,6 +5,8 @@
  */
 package Helper;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -21,5 +23,15 @@ public class SharedHelper {
         String emailRegex = "^(.+)@(.+)$";
         Pattern pattern = Pattern.compile(emailRegex);
         return pattern.matcher(email).matches();
+    }
+    
+    public static LocalDateTime isValidDateTime(String dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy, h:mma");
+        
+        try {
+            return LocalDateTime.parse(dateTime, formatter);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

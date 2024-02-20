@@ -13,14 +13,60 @@ import java.time.LocalDateTime;
  */
 public class Appointment {
     private String serviceName;
+    private String customerEmail;
+    private String technicianEmail;
     private LocalDateTime startingDateTime;
     private LocalDateTime endingDateTime;
     
     public Appointment(String serviceName,
+                        String customerEmail,
+                        String technicianEmail,
                         LocalDateTime startingDateTime,
                         LocalDateTime endingDateTime) {
         this.serviceName = serviceName;
+        this.customerEmail = customerEmail;
+        this.technicianEmail = technicianEmail;
         this.startingDateTime = startingDateTime;
+        this.endingDateTime = endingDateTime;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public String getTechnicianEmail() {
+        return technicianEmail;
+    }
+
+    public void setTechnicianEmail(String technicianEmail) {
+        this.technicianEmail = technicianEmail;
+    }
+
+    public LocalDateTime getStartingDateTime() {
+        return startingDateTime;
+    }
+
+    public void setStartingDateTime(LocalDateTime startingDateTime) {
+        this.startingDateTime = startingDateTime;
+    }
+
+    public LocalDateTime getEndingDateTime() {
+        return endingDateTime;
+    }
+
+    public void setEndingDateTime(LocalDateTime endingDateTime) {
         this.endingDateTime = endingDateTime;
     }
 }

@@ -5,6 +5,7 @@
  */
 package Models;
 
+import Helper.SharedHelper;
 import java.io.File;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ import javax.swing.JOptionPane;
  * @author sphal
  */
 public class Database {
-    private static String dirPrefix = "Databases/";
+    private static final String dirPrefix = "Databases/";
     private static ArrayList<User> users = new ArrayList<User>();
     private static ArrayList<Service> services = new ArrayList<Service>();
     private static ArrayList<Appointment> appointments = new ArrayList<Appointment>();
@@ -34,7 +35,6 @@ public class Database {
         for (String dbname: new String[]{"users", "services", "appointments", "payments", "feedbacks"}) {
             try {
             Scanner input = new Scanner(new File(getDBFolder() + dbname + ".txt"));
-            String test = getDBFolder() + dbname + ".txt";
             while (input.hasNext()) {
                 if (dbname == "users") {
                     String userName = input.nextLine();
@@ -46,22 +46,24 @@ public class Database {
                     users.add(new User(userName, password, phoneNumber, emailAddress, homeAddress, role));
                 } else if (dbname == "appointments") {
                     String serviceName = input.nextLine();
-                    LocalDateTime startingDateTime = LocalDateTime.parse(input.nextLine());
-                    LocalDateTime endingDateTime = LocalDateTime.parse(input.nextLine());
-                    appointments.add(new Appointment(serviceName, startingDateTime, endingDateTime));
+                    String customerEmail = input.nextLine();
+                    String technicianEmail = input.nextLine();
+                    LocalDateTime startingDateTime = SharedHelper.isValidDateTime(input.nextLine());
+                    LocalDateTime endingDateTime = SharedHelper.isValidDateTime(input.nextLine());
+                    appointments.add(new Appointment(serviceName, customerEmail, technicianEmail, startingDateTime, endingDateTime));
                 } else if (dbname == "payments") {
                     double amount = Double.parseDouble(input.nextLine());
                     String paymentOption = input.nextLine();
-                    String senderName = input.nextLine();
-                    String receiverName = input.nextLine();
-                    payments.add(new Payment(amount, paymentOption, senderName, receiverName));
+                    String senderEmail = input.nextLine();
+                    String receiverEmail = input.nextLine();
+                    payments.add(new Payment(amount, paymentOption, senderEmail, receiverEmail));
                 } else if (dbname == "feedbacks") {
-                    String senderName = input.nextLine();
-                    String receiverName = input.nextLine();
+                    String senderEmail = input.nextLine();
+                    String receiverEmail = input.nextLine();
                     LocalDateTime createdDate = LocalDateTime.parse(input.nextLine());
                     double rating = Double.parseDouble(input.nextLine());
                     String message = input.nextLine();
-                    feedbacks.add(new Feedback(senderName, receiverName, createdDate, rating, message));
+                    feedbacks.add(new Feedback(senderEmail, receiverEmail, createdDate, rating, message));
                 }
                 input.nextLine();
             }
@@ -75,6 +77,8 @@ public class Database {
     private static String getDBFolder() {
         return System.getProperty("user.dir") + "/src/" + dirPrefix;
     }
+    
+    // users
     
     public static User[] getUsers() {
         User[] arrayUser = new User[] {};
@@ -94,6 +98,25 @@ public class Database {
         users.add(user);
     }
     
+    public static void updateOrCreateUser(User user) {
+        boolean userExisted = false;
+        for (User updatingUser: users) {
+            if (updatingUser.getEmailAddress().equals(user.getEmailAddress())) {
+                userExisted = true;
+                updatingUser.setUserName(user.getUserName());
+                updatingUser.setPassword(user.getPassword());
+                updatingUser.setPhoneNumber(user.getPhoneNumber());
+                updatingUser.setHomeAddress(user.getHomeAddress());
+                updatingUser.setRole(user.getRole());
+                break;
+            }
+        }
+        
+        if (!userExisted) {
+            users.add(user);
+        }
+    }
+    
     public static void removeUser(String username) {
         users.removeIf(user -> user.getUserName().equals(username));
     }
@@ -108,6 +131,43 @@ public class Database {
                 output.println(user.getEmailAddress());
                 output.println(user.getHomeAddress());
                 output.println(user.getRole());
+                output.println();
+            }
+            output.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Database Error " + ex.getMessage());
+        }
+    }
+    
+    // feedbacks
+    public static Feedback[] getFeedbacks() {
+        Feedback[] arrayFeedbacks = new Feedback[] {};
+        return feedbacks.toArray(arrayFeedbacks);
+    }
+    
+    // appointments
+    public static Appointment[] getAppointments() {
+        Appointment[] arrayAppointments = new Appointment[] {};
+        return appointments.toArray(arrayAppointments);
+    }
+    
+    public static void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+    }
+    
+    public static void updateAppointment(Appointment appointment, int index) {
+        appointments.set(index, appointment);
+    }
+    
+    public static void writeToAppointments() {
+        try {
+            PrintWriter output = new PrintWriter(getDBFolder() + "appointments.txt");
+            for (Appointment appointment: appointments) {
+                output.println(appointment.getServiceName());
+                output.println(appointment.getCustomerEmail());
+                output.println(appointment.getTechnicianEmail());
+                output.println(appointment.getStartingDateTime());
+                output.println(appointment.getEndingDateTime());
                 output.println();
             }
             output.close();
