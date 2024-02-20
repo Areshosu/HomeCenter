@@ -17,7 +17,7 @@ public class User {
     private String homeAddress;
     private String role;
     
-    private static String[] roles = {
+    private static final String[] roles = {
         "customer",
         "manager",
         "technician"
@@ -89,5 +89,8 @@ public class User {
         return roles;
     }
     
-    
+    @Override
+    public String toString() {
+        return this.emailAddress;
+    }
 }

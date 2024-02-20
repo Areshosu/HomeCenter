@@ -5,6 +5,7 @@
  */
 package Models;
 
+import Helper.SharedHelper;
 import java.io.File;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ import javax.swing.JOptionPane;
  * @author sphal
  */
 public class Database {
-    private static String dirPrefix = "Databases/";
+    private static final String dirPrefix = "Databases/";
     private static ArrayList<User> users = new ArrayList<User>();
     private static ArrayList<Service> services = new ArrayList<Service>();
     private static ArrayList<Appointment> appointments = new ArrayList<Appointment>();
@@ -45,9 +46,11 @@ public class Database {
                     users.add(new User(userName, password, phoneNumber, emailAddress, homeAddress, role));
                 } else if (dbname == "appointments") {
                     String serviceName = input.nextLine();
-                    LocalDateTime startingDateTime = LocalDateTime.parse(input.nextLine());
-                    LocalDateTime endingDateTime = LocalDateTime.parse(input.nextLine());
-                    appointments.add(new Appointment(serviceName, startingDateTime, endingDateTime));
+                    String customerEmail = input.nextLine();
+                    String technicianEmail = input.nextLine();
+                    LocalDateTime startingDateTime = SharedHelper.isValidDateTime(input.nextLine());
+                    LocalDateTime endingDateTime = SharedHelper.isValidDateTime(input.nextLine());
+                    appointments.add(new Appointment(serviceName, customerEmail, technicianEmail, startingDateTime, endingDateTime));
                 } else if (dbname == "payments") {
                     double amount = Double.parseDouble(input.nextLine());
                     String paymentOption = input.nextLine();
@@ -140,5 +143,36 @@ public class Database {
     public static Feedback[] getFeedbacks() {
         Feedback[] arrayFeedbacks = new Feedback[] {};
         return feedbacks.toArray(arrayFeedbacks);
+    }
+    
+    // appointments
+    public static Appointment[] getAppointments() {
+        Appointment[] arrayAppointments = new Appointment[] {};
+        return appointments.toArray(arrayAppointments);
+    }
+    
+    public static void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+    }
+    
+    public static void updateAppointment(Appointment appointment, int index) {
+        appointments.set(index, appointment);
+    }
+    
+    public static void writeToAppointments() {
+        try {
+            PrintWriter output = new PrintWriter(getDBFolder() + "appointments.txt");
+            for (Appointment appointment: appointments) {
+                output.println(appointment.getServiceName());
+                output.println(appointment.getCustomerEmail());
+                output.println(appointment.getTechnicianEmail());
+                output.println(appointment.getStartingDateTime());
+                output.println(appointment.getEndingDateTime());
+                output.println();
+            }
+            output.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Database Error " + ex.getMessage());
+        }
     }
 }

@@ -5,31 +5,24 @@ alex@gmail.com
 
 manager
 
-yyyhao0422
-1q2w3E*
-0
-null
-null
-customer
-
-techni
-aaa
-0
-null
-null
-technician
-
 New User :D
-aaa
+123
 60123456789
-yyh@gmail.com
-hahhhh
+alex2@gmail.com
+
 customer
 
 New User :D
 123
 60123456789
-alex2@gmail.com
+alex1@gmail.com
+
+technician
+
+New User :D
+123
+60123456789
+alex3@gmail.com
 
 customer
 

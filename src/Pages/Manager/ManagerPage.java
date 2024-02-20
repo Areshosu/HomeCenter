@@ -14,6 +14,7 @@ import Pages.MainMenuPage;
 public class ManagerPage extends javax.swing.JFrame {
 
     public static ManageUserPage manageUserPage; 
+    public static ManageAppointmentPage manageAppointmentPage;
     public static ManageFeedbackPage manageFeedbackPage;
     /**
      * Creates new form ManagerPage
@@ -48,6 +49,11 @@ public class ManagerPage extends javax.swing.JFrame {
         });
 
         appointmentBtn.setText("Appointments");
+        appointmentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentBtnActionPerformed(evt);
+            }
+        });
 
         feedbackBtn.setText("Feedbacks");
         feedbackBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +123,13 @@ public class ManagerPage extends javax.swing.JFrame {
         manageFeedbackPage.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_feedbackBtnActionPerformed
+
+    private void appointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentBtnActionPerformed
+        manageAppointmentPage = new ManageAppointmentPage();
+        manageAppointmentPage.setLocation(500, 500);
+        manageAppointmentPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_appointmentBtnActionPerformed
 
     /**
      * @param args the command line arguments
