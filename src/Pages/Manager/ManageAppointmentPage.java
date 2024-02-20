@@ -9,6 +9,7 @@ import Helper.DeselectOnReselectModel;
 import Helper.SharedHelper;
 import Models.Appointment;
 import Models.Database;
+import Models.Service;
 import Models.User;
 import Pages.MainMenuPage;
 import java.awt.Color;
@@ -42,7 +43,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
                         appointmentTable.getSelectionModel().clearSelection();
                     }
                     if (appointmentTable.getSelectedRow() == -1) {
-                        serviceNameField.setText("");
+                        serviceNameField.setSelectedIndex(0);
                         customerEmailField.setSelectedIndex(0);
                         technicianEmailField.setSelectedIndex(0);
                         startingDateField.setText(dateTimeFieldPlaceHolder);
@@ -51,7 +52,9 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
                     }                
                     selectedRowIndex = appointmentTable.getSelectedRow();
                     
-                    serviceNameField.setText(appointmentTable.getValueAt(selectedRowIndex, 0).toString());
+                    String service = appointmentTable.getValueAt(selectedRowIndex, 0).toString();
+                    String[] services = Arrays.stream(Database.getServices()).map(Service::toString).toArray(String[]::new);
+                    serviceNameField.setSelectedIndex(SharedHelper.indexOf(services, service));
                     String customerEmail = appointmentTable.getValueAt(selectedRowIndex, 1).toString();
                     String[] customerEmails = Arrays.stream(Database.getUsers()).filter(user -> user.getRole().equals("customer")).map(User::toString).toArray(String[]::new);
                     String technicianEmail = appointmentTable.getValueAt(selectedRowIndex, 2).toString();
@@ -71,6 +74,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
         
         this.refreshTable();
         this.refreshEmailsSelection();
+        this.refreshServicesSelection();
     }
     
     private void refreshTable() {
@@ -101,6 +105,14 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
         customerEmailField.setModel(customerModels);
         technicianEmailField.setModel(technicianModels);          
     }
+    
+    private void refreshServicesSelection() {
+        DefaultComboBoxModel serviceModels = new DefaultComboBoxModel();
+        for (Service service: Database.getServices()) {
+            serviceModels.addElement(service);
+        }
+        serviceNameField.setModel(serviceModels);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,12 +135,12 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
         endingDateField = new javax.swing.JTextField();
         createUpdateBtn = new javax.swing.JButton();
         formMessage = new javax.swing.JLabel();
-        serviceNameField = new javax.swing.JTextField();
         backBtn = new javax.swing.JButton();
         startDateValidateMsg = new javax.swing.JLabel();
         endDateValidateMsg = new javax.swing.JLabel();
         customerEmailField = new javax.swing.JComboBox<>();
         technicianEmailField = new javax.swing.JComboBox<>();
+        serviceNameField = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -227,6 +239,8 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
 
         technicianEmailField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        serviceNameField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,17 +258,9 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(formMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(17, 17, 17))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(serviceNameLabel)
-                                    .addComponent(customerEmailLabel)
-                                    .addComponent(technicianEmailLabel)
-                                    .addComponent(customerEmailField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(12, 12, 12))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(technicianEmailField, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(serviceNameField, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(startingDateField, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(endingDateField, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(createUpdateBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
@@ -266,7 +272,18 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
                                         .addComponent(endingDateLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(endDateValidateMsg)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(serviceNameField, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(customerEmailField, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(serviceNameLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(customerEmailLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(technicianEmailLabel, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(12, 12, 12)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
@@ -286,7 +303,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
                         .addComponent(serviceNameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(serviceNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(customerEmailLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(customerEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,7 +327,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
                         .addComponent(createUpdateBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(formMessage)
-                        .addGap(0, 17, Short.MAX_VALUE)))
+                        .addGap(0, 11, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -322,7 +339,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
     }//GEN-LAST:event_endingDateFieldActionPerformed
 
     private void createUpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUpdateBtnActionPerformed
-        String serviceName = serviceNameField.getText();
+        String serviceName = serviceNameField.getSelectedItem().toString();
         String customerEmail = customerEmailField.getSelectedItem().toString();
         String technicianEmail = technicianEmailField.getSelectedItem().toString();
         LocalDateTime startDate = SharedHelper.isValidDateTime(startingDateField.getText());
@@ -450,7 +467,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
     private javax.swing.JLabel endingDateLabel;
     private javax.swing.JLabel formMessage;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField serviceNameField;
+    private javax.swing.JComboBox<String> serviceNameField;
     private javax.swing.JLabel serviceNameLabel;
     private javax.swing.JLabel startDateValidateMsg;
     private javax.swing.JTextField startingDateField;

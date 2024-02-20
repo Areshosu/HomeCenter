@@ -44,6 +44,13 @@ public class Database {
                     String homeAddress = input.nextLine();
                     String role = input.nextLine();
                     users.add(new User(userName, password, phoneNumber, emailAddress, homeAddress, role));
+                } else if (dbname == "services") {
+                    String technicianEmail = input.nextLine();
+                    String serviceTitle = input.nextLine();
+                    String description = input.nextLine();
+                    double price = Double.parseDouble(input.nextLine());
+                    String serviceArea = input.nextLine();
+                    services.add(new Service(technicianEmail, serviceTitle, description, price, serviceArea));
                 } else if (dbname == "appointments") {
                     String serviceName = input.nextLine();
                     String customerEmail = input.nextLine();
@@ -151,13 +158,19 @@ public class Database {
                 output.println(appointment.getServiceName());
                 output.println(appointment.getCustomerEmail());
                 output.println(appointment.getTechnicianEmail());
-                output.println(appointment.getStartingDateTime());
-                output.println(appointment.getEndingDateTime());
+                output.println(SharedHelper.dateToString(appointment.getStartingDateTime()));
+                output.println(SharedHelper.dateToString(appointment.getEndingDateTime()));
                 output.println();
             }
             output.close();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Database Error " + ex.getMessage());
         }
+    }
+    
+    // services
+    public static Service[] getServices() {
+        Service[] arrayServices = new Service[] {};
+        return services.toArray(arrayServices);
     }
 }

@@ -41,4 +41,49 @@ public class Service {
         this.price = price;
         this.serviceArea = serviceArea;
     }
+
+    public String getTechnicianEmail() {
+        return technicianEmail;
+    }
+
+    public void setTechnicianEmail(String technicianEmail) {
+        this.technicianEmail = technicianEmail;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getServiceArea() {
+        return serviceArea;
+    }
+
+    public void setServiceArea(String serviceArea) {
+        this.serviceArea = serviceArea;
+    }
+    
+    @Override
+    public String toString() {
+        return this.title;
+    }
 }
