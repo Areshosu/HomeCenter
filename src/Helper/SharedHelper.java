@@ -15,6 +15,8 @@ import java.util.regex.Pattern;
  * @author sphal
  */
 public class SharedHelper {
+    private static final String datePattern = "dd/MM/yyyy, h:mma";
+    
     public static <T> int indexOf(T[] arr, T val) {
         return Arrays.asList(arr).indexOf(val);
     }
@@ -26,11 +28,21 @@ public class SharedHelper {
     }
     
     public static LocalDateTime isValidDateTime(String dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy, h:mma");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(datePattern);
         
         try {
             return LocalDateTime.parse(dateTime, formatter);
         } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public static String dateToString(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(datePattern);
+
+        try {
+            return dateTime.format(formatter);
+        } catch (Exception ex) {
             return null;
         }
     }

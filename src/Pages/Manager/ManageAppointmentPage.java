@@ -81,8 +81,8 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
                     appointment.getServiceName(),
                     appointment.getCustomerEmail(),
                     appointment.getTechnicianEmail(),
-                    appointment.getStartingDateTime(),
-                    appointment.getEndingDateTime()
+                    SharedHelper.dateToString(appointment.getStartingDateTime()),
+                    SharedHelper.dateToString(appointment.getEndingDateTime())
                 });
             }            
         appointmentTable.setModel(appointmentTableModel);      

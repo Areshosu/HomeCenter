@@ -5,12 +5,12 @@
  */
 package Pages.Manager;
 
+import Helper.DeselectOnReselectModel;
 import Helper.SharedHelper;
 import Models.Database;
 import Models.User;
 import Pages.MainMenuPage;
 import java.awt.Color;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author sphal
  */
 public class ManageUserPage extends javax.swing.JFrame {
+    private int selectedRowIndex = -1;
 
     /**
      * Creates new form ManageCustomer
@@ -32,18 +33,33 @@ public class ManageUserPage extends javax.swing.JFrame {
             roles.addElement(role);
         }
         roleField.setModel(roles);
+        userTable.setSelectionModel(new DeselectOnReselectModel());
         userTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
-                if (userTable.getSelectedRow() == -1) {
-                    return;
-                }
-                usernameField.setText(userTable.getValueAt(userTable.getSelectedRow(), 0).toString());
-                passwordField.setText(userTable.getValueAt(userTable.getSelectedRow(), 1).toString());
-                phoneField.setText(userTable.getValueAt(userTable.getSelectedRow(), 2).toString());
-                emailField.setText(userTable.getValueAt(userTable.getSelectedRow(), 3).toString());
-                addressField.setText(userTable.getValueAt(userTable.getSelectedRow(), 4).toString());
-                String selectedRole = userTable.getValueAt(userTable.getSelectedRow(), 5).toString();
-                roleField.setSelectedIndex(SharedHelper.indexOf(User.getRoles(), selectedRole));
+                if (!event.getValueIsAdjusting()) {
+                    if (selectedRowIndex == userTable.getSelectedRow()) {
+                        selectedRowIndex = -1;
+                        userTable.getSelectionModel().clearSelection();
+                    }
+                    if (userTable.getSelectedRow() == -1) {
+                        usernameField.setText("");
+                        passwordField.setText("");
+                        phoneField.setText("");
+                        emailField.setText("");
+                        addressField.setText("");
+                        roleField.setSelectedIndex(0);                          
+                        return;
+                    }
+                    selectedRowIndex = userTable.getSelectedRow();
+                    
+                    usernameField.setText(userTable.getValueAt(userTable.getSelectedRow(), 0).toString());
+                    passwordField.setText(userTable.getValueAt(userTable.getSelectedRow(), 1).toString());
+                    phoneField.setText(userTable.getValueAt(userTable.getSelectedRow(), 2).toString());
+                    emailField.setText(userTable.getValueAt(userTable.getSelectedRow(), 3).toString());
+                    addressField.setText(userTable.getValueAt(userTable.getSelectedRow(), 4).toString());
+                    String selectedRole = userTable.getValueAt(userTable.getSelectedRow(), 5).toString();
+                    roleField.setSelectedIndex(SharedHelper.indexOf(User.getRoles(), selectedRole));                    
+                    }
             }
         });
     }
@@ -163,7 +179,7 @@ public class ManageUserPage extends javax.swing.JFrame {
             }
         });
 
-        emailLabel.setText("Email (note: creates new user if not exist)");
+        emailLabel.setText("Email ");
 
         addressLabel.setText("Address");
 
@@ -214,7 +230,7 @@ public class ManageUserPage extends javax.swing.JFrame {
                     .addComponent(formMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(215, 485, Short.MAX_VALUE)
+                        .addGap(215, 487, Short.MAX_VALUE)
                         .addComponent(userListingLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -292,10 +308,17 @@ public class ManageUserPage extends javax.swing.JFrame {
             return;
         }
         
-        Database.updateOrCreateUser(new User(username, password, phoneNum, emailAdd, homeAdd, selectedRole));
+        User user = new User(username, password, phoneNum, emailAdd, homeAdd, selectedRole);
+        if (selectedRowIndex != -1) {
+            Database.updateUser(user, selectedRowIndex);
+            formMessage.setText("Successfully updated!");
+        } else {
+            Database.addUser(user);
+            formMessage.setText("Successfully added!");            
+        }
+        
         Database.writeToUsers();
         refreshTable();
-        formMessage.setText("Successfully updated!");
         formMessage.setForeground(Color.green);
     }//GEN-LAST:event_createUpdateBtnActionPerformed
 

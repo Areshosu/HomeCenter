@@ -1,8 +1,8 @@
 New User :D
 123
 60123456789
-alex@gmail.com
-
+alex@gmail.comm
+haha
 manager
 
 New User :D
@@ -25,4 +25,11 @@ New User :D
 alex3@gmail.com
 
 customer
+
+New User :D
+123
+60123456789
+alex@gmail.com
+
+manager
 
