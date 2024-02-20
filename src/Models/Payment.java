@@ -20,16 +20,16 @@ public class Payment {
     
     private double amount;
     private String paymentOption;
-    private String senderName;
-    private String receiverName;
+    private String senderEmail;
+    private String receiverEmail;
     
     public Payment(double amount,
                     String paymentOption,
-                    String senderName,
-                    String receiverName) {
+                    String senderEmail,
+                    String receiverEmail) {
         this.amount = amount;
         this.paymentOption = paymentOption;
-        this.senderName = senderName;
-        this.receiverName = receiverName;
+        this.senderEmail = senderEmail;
+        this.receiverEmail = receiverEmail;
     }
 }

@@ -10,7 +10,7 @@ package Models;
  * @author sphal
  */
 public class Service {
-    private String technicianName;
+    private String technicianEmail;
     private String title;
     private String description;
     private double price;
@@ -30,12 +30,12 @@ public class Service {
         "Kuching"
     };
 
-    public Service(String technicianName,
+    public Service(String technicianEmail,
                     String title,
                     String description,
                     double price,
                     String serviceArea) {
-        this.technicianName = technicianName;
+        this.technicianEmail = technicianEmail;
         this.title = title;
         this.description = description;
         this.price = price;
