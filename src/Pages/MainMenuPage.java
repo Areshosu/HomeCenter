@@ -32,7 +32,7 @@ import javax.swing.border.TitledBorder;
  * @author sphal
  */
 public class MainMenuPage implements ActionListener {
-    JFrame container;
+    static JFrame container;
     JPanel panel;
     JLabel emailLabel, passwordLabel, roleLabel;
     JTextField emailField;
@@ -40,6 +40,7 @@ public class MainMenuPage implements ActionListener {
     JComboBox roleField;
     Button login, register, exit;
     
+    public static ManagerPage managerPage;
     public static CustomerPage customerPage;
     public static TechnicianPage technicianPage;
     
@@ -67,8 +68,10 @@ public class MainMenuPage implements ActionListener {
                 emailField.setText("");
                 passwordField.setText("");
                 } else if (selectedRole.equals("manager")) {
-                    ManagerPage managerPage = new ManagerPage();
+                    managerPage = new ManagerPage();
+                    managerPage.setLocation(500, 500);
                     managerPage.setVisible(true);
+                    container.setVisible(false);
                 }
             } else {
                 JOptionPane.showMessageDialog(login, "Invalid email or password");
@@ -133,5 +136,9 @@ public class MainMenuPage implements ActionListener {
         panel.add(exit);        
         container.add(panel, BorderLayout.CENTER);
         container.setVisible(true);
+    }
+    
+    public static void setVisible(boolean b) {
+        container.setVisible(b);
     }
 }

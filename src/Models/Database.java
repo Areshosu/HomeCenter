@@ -34,7 +34,6 @@ public class Database {
         for (String dbname: new String[]{"users", "services", "appointments", "payments", "feedbacks"}) {
             try {
             Scanner input = new Scanner(new File(getDBFolder() + dbname + ".txt"));
-            String test = getDBFolder() + dbname + ".txt";
             while (input.hasNext()) {
                 if (dbname == "users") {
                     String userName = input.nextLine();
@@ -75,6 +74,8 @@ public class Database {
     private static String getDBFolder() {
         return System.getProperty("user.dir") + "/src/" + dirPrefix;
     }
+    
+    // users
     
     public static User[] getUsers() {
         User[] arrayUser = new User[] {};
@@ -133,5 +134,11 @@ public class Database {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Database Error " + ex.getMessage());
         }
+    }
+    
+    // feedbacks
+    public static Feedback[] getFeedbacks() {
+        Feedback[] arrayFeedbacks = new Feedback[] {};
+        return feedbacks.toArray(arrayFeedbacks);
     }
 }

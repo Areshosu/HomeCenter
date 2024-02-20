@@ -8,6 +8,7 @@ package Pages.Manager;
 import Helper.SharedHelper;
 import Models.Database;
 import Models.User;
+import Pages.MainMenuPage;
 import java.awt.Color;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -33,6 +34,9 @@ public class ManageUserPage extends javax.swing.JFrame {
         roleField.setModel(roles);
         userTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
+                if (userTable.getSelectedRow() == -1) {
+                    return;
+                }
                 usernameField.setText(userTable.getValueAt(userTable.getSelectedRow(), 0).toString());
                 passwordField.setText(userTable.getValueAt(userTable.getSelectedRow(), 1).toString());
                 phoneField.setText(userTable.getValueAt(userTable.getSelectedRow(), 2).toString());
@@ -93,7 +97,7 @@ public class ManageUserPage extends javax.swing.JFrame {
         userListingLabel = new javax.swing.JLabel();
         roleLabel = new javax.swing.JLabel();
         roleField = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        BackBtn = new javax.swing.JButton();
         formMessage = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
@@ -175,7 +179,12 @@ public class ManageUserPage extends javax.swing.JFrame {
 
         roleField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setText("Back");
+        BackBtn.setText("Back");
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,7 +194,7 @@ public class ManageUserPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(BackBtn)
                         .addGap(142, 142, 142))
                     .addComponent(roleField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addressField)
@@ -219,7 +228,7 @@ public class ManageUserPage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
+                        .addComponent(BackBtn)
                         .addGap(18, 18, 18)
                         .addComponent(usernameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -306,6 +315,11 @@ public class ManageUserPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordFieldActionPerformed
 
+    private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
+        this.setVisible(false);
+        MainMenuPage.managerPage.setVisible(true);
+    }//GEN-LAST:event_BackBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -349,13 +363,13 @@ public class ManageUserPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackBtn;
     private javax.swing.JTextField addressField;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JButton createUpdateBtn;
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel formMessage;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField passwordField;
