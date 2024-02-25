@@ -5,13 +5,15 @@
  */
 package Pages.Technician;
 
+import Models.Database;
+import Models.Service;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author yyhao0422
  */
 public class ViewServicesPage extends javax.swing.JFrame {
-    
-   
     
 
     /**
@@ -19,6 +21,28 @@ public class ViewServicesPage extends javax.swing.JFrame {
      */
     public ViewServicesPage() {
         initComponents();
+        
+       
+        
+    }
+    
+    @Override
+    public void setVisible(boolean b){
+        super.setVisible(b);
+        String[] columns = {"title", "desc", "price", "serviceArea"};
+        DefaultTableModel serviceTableModel = new DefaultTableModel(columns, 0);
+        if(b){
+            for (Service service: Database.getServices()) {
+                serviceTableModel.addRow(new Object[] {
+                    service.getTechnicianEmail(),
+                    service.getTitle(),
+                    service.getDescription(),
+                    service.getPrice(),
+                    service.getServiceArea()
+                });
+            }
+        }
+        serviceTable.setModel(serviceTableModel);
     }
 
     /**
@@ -33,6 +57,8 @@ public class ViewServicesPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         AddServicesButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        serviceTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +79,25 @@ public class ViewServicesPage extends javax.swing.JFrame {
             }
         });
 
+        serviceTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title", "Description", "Price", "Service Area"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        serviceTable.setMinimumSize(new java.awt.Dimension(80, 64));
+        jScrollPane1.setViewportView(serviceTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -61,13 +106,16 @@ public class ViewServicesPage extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 457, Short.MAX_VALUE)
+                        .addComponent(exitButton)
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(AddServicesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 554, Short.MAX_VALUE)
-                        .addComponent(exitButton)
-                        .addGap(24, 24, 24))))
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,9 +124,11 @@ public class ViewServicesPage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(exitButton))
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addComponent(AddServicesButton)
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -135,5 +185,7 @@ public class ViewServicesPage extends javax.swing.JFrame {
     private javax.swing.JButton AddServicesButton;
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable serviceTable;
     // End of variables declaration//GEN-END:variables
 }

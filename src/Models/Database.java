@@ -34,7 +34,7 @@ public class Database {
         for (String dbname: new String[]{"users", "services", "appointments", "payments", "feedbacks"}) {
             try {
             Scanner input = new Scanner(new File(getDBFolder() + dbname + ".txt"));
-            String test = getDBFolder() + dbname + ".txt";
+            
             while (input.hasNext()) {
                 if (dbname == "users") {
                     String userName = input.nextLine();
@@ -62,6 +62,13 @@ public class Database {
                     double rating = Double.parseDouble(input.nextLine());
                     String message = input.nextLine();
                     feedbacks.add(new Feedback(senderName, receiverName, createdDate, rating, message));
+                } else if (dbname == "services"){
+                    String technicianEmail = input.nextLine();
+                    String title = input.nextLine();
+                    String description = input.nextLine();
+                    double price = Double.parseDouble(input.nextLine());
+                    String serviceArea = input.nextLine();
+                    services.add(new Service(technicianEmail,title,description,price,serviceArea));
                 }
                 input.nextLine();
             }
@@ -113,6 +120,45 @@ public class Database {
             output.close();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Database Error " + ex.getMessage());
+        }
+    }
+    
+    public static Service[] getServices(){
+        Service[] arrayService = new Service[] {};
+        return services.toArray(arrayService);
+    }
+    
+    public static Service findService(String email){
+        for (Service service: services){
+            if (service.getTechnicianEmail().equals(email)){
+                return service;
+            }
+        }
+        return null;
+    }
+
+    public static void addService(Service service){
+        services.add(service);
+    }
+    
+    public static void removeService(String email){
+        services.removeIf(service -> service.getTechnicianEmail().equals(email) );
+    }
+    
+    public static void writeToServices(){
+        try{
+            PrintWriter output = new PrintWriter(getDBFolder()+"services.txt");
+            for (Service service:services){
+                output.println(service.getTechnicianEmail());
+                output.println(service.getTitle());
+                output.println(service.getDescription());
+                output.println(service.getPrice());
+                output.println(service.getServiceArea());
+                output.println();
+            }
+            output.close();
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(null, "Database Error " + ex.getMessage());
         }
     }
 }
