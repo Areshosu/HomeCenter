@@ -1,10 +1,39 @@
 New User :D
 123
 60123456789
+alex@gmail.comm
+haha
+manager
+
+New User :D
+123
+60123456789
+alex2@gmail.com
+
+customer
+
+New User :D
+123
+60123456789
+alex1@gmail.com
+
+technician
+
+New User :D
+123
+60123456789
+alex3@gmail.com
+
+customer
+
+New User :D
+123
+60123456789
 alex@gmail.com
 
 manager
 
+<<<<<<< HEAD
 yyyhao0422
 1q2w3E*
 0
@@ -40,3 +69,5 @@ admin@gmail.com
 
 manager
 
+=======
+>>>>>>> 617f38a37c359272a38f853bcb65e863035362b8

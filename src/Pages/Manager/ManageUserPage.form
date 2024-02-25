@@ -32,31 +32,33 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="roleField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="addressField" alignment="0" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="passwordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="phoneLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="emailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="addressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="usernameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="roleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="emailField" alignment="0" pref="200" max="32767" attributes="0"/>
-                              <Component id="phoneField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="passwordField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="usernameField" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Component id="createUpdateBtn" pref="200" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="BackBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="roleField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="addressField" alignment="0" max="32767" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="1" attributes="0">
+                      <Component id="passwordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="phoneLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="emailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="addressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="usernameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="roleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="emailField" alignment="0" pref="200" max="32767" attributes="0"/>
+                          <Component id="phoneField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="passwordField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="usernameField" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="createUpdateBtn" alignment="0" max="32767" attributes="0"/>
+                  <Component id="formMessage" max="32767" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="215" pref="287" max="32767" attributes="0"/>
+                      <EmptySpace min="215" pref="487" max="32767" attributes="0"/>
                       <Component id="userListingLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -75,8 +77,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <Component id="BackBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="usernameLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="usernameField" min="-2" max="-2" attributes="0"/>
@@ -102,6 +104,8 @@
                       <Component id="roleField" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="createUpdateBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="formMessage" pref="15" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -208,8 +212,11 @@
     </Component>
     <Component class="javax.swing.JLabel" name="emailLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Email"/>
+        <Property name="text" type="java.lang.String" value="Email "/>
       </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+      </AccessibilityProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="emailField">
     </Component>
@@ -248,10 +255,15 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="BackBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BackBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="formMessage">
     </Component>
   </SubComponents>
 </Form>

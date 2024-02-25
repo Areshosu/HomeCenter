@@ -16,7 +16,7 @@ public class Service {
     private double price;
     private String serviceArea;
     
-    private static String[] areas = {
+    private static final String[] areas = {
         "Kuala Lumpur",
         "Ipoh",
         "Malacca",
@@ -80,10 +80,10 @@ public class Service {
 
     public void setServiceArea(String serviceArea) {
         this.serviceArea = serviceArea;
+    } 
+    
+    @Override
+    public String toString() {
+        return this.title;
     }
-
- 
-    
-    
-    
 }

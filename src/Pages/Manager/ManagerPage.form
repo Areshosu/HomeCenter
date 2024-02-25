@@ -31,6 +31,7 @@
                   <Component id="appointmentBtn" max="32767" attributes="0"/>
                   <Component id="feedbackBtn" max="32767" attributes="0"/>
                   <Component id="jLabel1" max="32767" attributes="0"/>
+                  <Component id="LogoutBtn" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
           </Group>
@@ -47,7 +48,9 @@
               <Component id="appointmentBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="feedbackBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="LogoutBtn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -65,17 +68,31 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Appointments"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="appointmentBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="feedbackBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Feedbacks"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="feedbackBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="MANAGER MENU"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="LogoutBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Logout"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LogoutBtnActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

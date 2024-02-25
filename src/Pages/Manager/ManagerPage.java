@@ -5,12 +5,17 @@
  */
 package Pages.Manager;
 
+import Pages.MainMenuPage;
+
 /**
  *
  * @author sphal
  */
 public class ManagerPage extends javax.swing.JFrame {
 
+    public static ManageUserPage manageUserPage; 
+    public static ManageAppointmentPage manageAppointmentPage;
+    public static ManageFeedbackPage manageFeedbackPage;
     /**
      * Creates new form ManagerPage
      */
@@ -31,6 +36,7 @@ public class ManagerPage extends javax.swing.JFrame {
         appointmentBtn = new javax.swing.JButton();
         feedbackBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        LogoutBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MainMenu");
@@ -43,11 +49,28 @@ public class ManagerPage extends javax.swing.JFrame {
         });
 
         appointmentBtn.setText("Appointments");
+        appointmentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentBtnActionPerformed(evt);
+            }
+        });
 
         feedbackBtn.setText("Feedbacks");
+        feedbackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                feedbackBtnActionPerformed(evt);
+            }
+        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MANAGER MENU");
+
+        LogoutBtn.setText("Logout");
+        LogoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,7 +82,8 @@ public class ManagerPage extends javax.swing.JFrame {
                     .addComponent(userBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(appointmentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(feedbackBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LogoutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(147, 147, 147))
         );
         layout.setVerticalGroup(
@@ -73,16 +97,39 @@ public class ManagerPage extends javax.swing.JFrame {
                 .addComponent(appointmentBtn)
                 .addGap(18, 18, 18)
                 .addComponent(feedbackBtn)
-                .addGap(107, 107, 107))
+                .addGap(18, 18, 18)
+                .addComponent(LogoutBtn)
+                .addGap(57, 57, 57))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void userBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtnActionPerformed
-        ManageUserPage manageUserPage = new ManageUserPage();
+        manageUserPage = new ManageUserPage();
+        manageUserPage.setLocation(500, 500);
         manageUserPage.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_userBtnActionPerformed
+
+    private void LogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutBtnActionPerformed
+        MainMenuPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_LogoutBtnActionPerformed
+
+    private void feedbackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_feedbackBtnActionPerformed
+        manageFeedbackPage = new ManageFeedbackPage();
+        manageFeedbackPage.setLocation(500, 500);
+        manageFeedbackPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_feedbackBtnActionPerformed
+
+    private void appointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentBtnActionPerformed
+        manageAppointmentPage = new ManageAppointmentPage();
+        manageAppointmentPage.setLocation(500, 500);
+        manageAppointmentPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_appointmentBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,6 +167,7 @@ public class ManagerPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LogoutBtn;
     private javax.swing.JButton appointmentBtn;
     private javax.swing.JButton feedbackBtn;
     private javax.swing.JLabel jLabel1;

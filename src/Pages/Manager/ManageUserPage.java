@@ -5,10 +5,12 @@
  */
 package Pages.Manager;
 
+import Helper.DeselectOnReselectModel;
 import Helper.SharedHelper;
 import Models.Database;
 import Models.User;
-import javax.swing.ComboBoxModel;
+import Pages.MainMenuPage;
+import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -19,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author sphal
  */
 public class ManageUserPage extends javax.swing.JFrame {
+    private int selectedRowIndex = -1;
 
     /**
      * Creates new form ManageCustomer
@@ -30,15 +33,33 @@ public class ManageUserPage extends javax.swing.JFrame {
             roles.addElement(role);
         }
         roleField.setModel(roles);
+        userTable.setSelectionModel(new DeselectOnReselectModel());
         userTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
-                usernameField.setText(userTable.getValueAt(userTable.getSelectedRow(), 0).toString());
-                passwordField.setText(userTable.getValueAt(userTable.getSelectedRow(), 1).toString());
-                phoneField.setText(userTable.getValueAt(userTable.getSelectedRow(), 2).toString());
-                emailField.setText(userTable.getValueAt(userTable.getSelectedRow(), 3).toString());
-                addressField.setText(userTable.getValueAt(userTable.getSelectedRow(), 4).toString());
-                String selectedRole = userTable.getValueAt(userTable.getSelectedRow(), 5).toString();
-                roleField.setSelectedIndex(SharedHelper.indexOf(User.getRoles(), selectedRole));
+                if (!event.getValueIsAdjusting()) {
+                    if (selectedRowIndex == userTable.getSelectedRow()) {
+                        selectedRowIndex = -1;
+                        userTable.getSelectionModel().clearSelection();
+                    }
+                    if (userTable.getSelectedRow() == -1) {
+                        usernameField.setText("");
+                        passwordField.setText("");
+                        phoneField.setText("");
+                        emailField.setText("");
+                        addressField.setText("");
+                        roleField.setSelectedIndex(0);                          
+                        return;
+                    }
+                    selectedRowIndex = userTable.getSelectedRow();
+                    
+                    usernameField.setText(userTable.getValueAt(userTable.getSelectedRow(), 0).toString());
+                    passwordField.setText(userTable.getValueAt(userTable.getSelectedRow(), 1).toString());
+                    phoneField.setText(userTable.getValueAt(userTable.getSelectedRow(), 2).toString());
+                    emailField.setText(userTable.getValueAt(userTable.getSelectedRow(), 3).toString());
+                    addressField.setText(userTable.getValueAt(userTable.getSelectedRow(), 4).toString());
+                    String selectedRole = userTable.getValueAt(userTable.getSelectedRow(), 5).toString();
+                    roleField.setSelectedIndex(SharedHelper.indexOf(User.getRoles(), selectedRole));                    
+                    }
             }
         });
     }
@@ -47,9 +68,12 @@ public class ManageUserPage extends javax.swing.JFrame {
     public void setVisible(boolean b) {
         super.setVisible(b);
         
+        refreshTable();
+    }
+    
+    private void refreshTable() {
         String[] columns = {"user", "pass", "phone", "email", "address", "role"};
         DefaultTableModel userTableModel = new DefaultTableModel(columns, 0);        
-        if (b) {
             for (User user: Database.getUsers()) {
                 userTableModel.addRow(new Object[] {
                     user.getUserName(),
@@ -60,8 +84,7 @@ public class ManageUserPage extends javax.swing.JFrame {
                     user.getRole()
                 });
             }
-        }
-        userTable.setModel(userTableModel);
+        userTable.setModel(userTableModel);        
     }
 
     /**
@@ -90,7 +113,8 @@ public class ManageUserPage extends javax.swing.JFrame {
         userListingLabel = new javax.swing.JLabel();
         roleLabel = new javax.swing.JLabel();
         roleField = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        BackBtn = new javax.swing.JButton();
+        formMessage = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
 
@@ -155,7 +179,7 @@ public class ManageUserPage extends javax.swing.JFrame {
             }
         });
 
-        emailLabel.setText("Email");
+        emailLabel.setText("Email ");
 
         addressLabel.setText("Address");
 
@@ -171,7 +195,12 @@ public class ManageUserPage extends javax.swing.JFrame {
 
         roleField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setText("Back");
+        BackBtn.setText("Back");
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -179,27 +208,29 @@ public class ManageUserPage extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(roleField, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addressField, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(phoneLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(emailLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addressLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(roleLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(emailField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                .addComponent(phoneField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(usernameField, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addComponent(createUpdateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BackBtn)
+                        .addGap(142, 142, 142))
+                    .addComponent(roleField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addressField)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(phoneLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(emailLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(addressLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(roleLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(emailField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(phoneField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usernameField, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(createUpdateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(formMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(215, 287, Short.MAX_VALUE)
+                        .addGap(215, 487, Short.MAX_VALUE)
                         .addComponent(userListingLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -213,8 +244,8 @@ public class ManageUserPage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addComponent(BackBtn)
+                        .addGap(18, 18, 18)
                         .addComponent(usernameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,7 +270,9 @@ public class ManageUserPage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(roleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(createUpdateBtn))
+                        .addComponent(createUpdateBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(formMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(userListingLabel)
@@ -248,11 +281,45 @@ public class ManageUserPage extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        emailLabel.getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void createUpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUpdateBtnActionPerformed
-        // TODO add your handling code here:
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String phoneNum = phoneField.getText();
+        String emailAdd = emailField.getText();
+        String homeAdd = addressField.getText();
+        String selectedRole = roleField.getSelectedItem().toString();
+        
+        if (!SharedHelper.isValidEmail(emailAdd)) {
+            formMessage.setText("Invalid email");
+            formMessage.setForeground(Color.red);
+            return;
+        } else if (username.length() < 1 ||
+                    password.length() < 1 ||
+                    phoneNum.length() < 10 ||
+                    homeAdd.length() < 1 ||
+                    selectedRole.length() < 1) {
+            formMessage.setText("Invalid details, please try again.");
+            formMessage.setForeground(Color.red);
+            return;
+        }
+        
+        User user = new User(username, password, phoneNum, emailAdd, homeAdd, selectedRole);
+        if (selectedRowIndex != -1) {
+            Database.updateUser(user, selectedRowIndex);
+            formMessage.setText("Successfully updated!");
+        } else {
+            Database.addUser(user);
+            formMessage.setText("Successfully added!");            
+        }
+        
+        Database.writeToUsers();
+        refreshTable();
+        formMessage.setForeground(Color.green);
     }//GEN-LAST:event_createUpdateBtnActionPerformed
 
     private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
@@ -270,6 +337,11 @@ public class ManageUserPage extends javax.swing.JFrame {
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordFieldActionPerformed
+
+    private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
+        this.setVisible(false);
+        MainMenuPage.managerPage.setVisible(true);
+    }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,12 +386,13 @@ public class ManageUserPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackBtn;
     private javax.swing.JTextField addressField;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JButton createUpdateBtn;
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel emailLabel;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel formMessage;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField passwordField;
