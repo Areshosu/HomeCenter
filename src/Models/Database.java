@@ -131,6 +131,46 @@ public class Database {
         }
     }
     
+    // Services
+    public static Service[] getServices(){
+        Service[] arrayService = new Service[] {};
+        return services.toArray(arrayService);
+    }
+    
+    public static Service findService(String email){
+        for (Service service: services){
+            if (service.getTechnicianEmail().equals(email)){
+                return service;
+            }
+        }
+        return null;
+    }
+
+    public static void addService(Service service){
+        services.add(service);
+    }
+    
+    public static void removeService(String email){
+        services.removeIf(service -> service.getTechnicianEmail().equals(email) );
+    }
+    
+    public static void writeToServices(){
+        try{
+            PrintWriter output = new PrintWriter(getDBFolder()+"services.txt");
+            for (Service service:services){
+                output.println(service.getTechnicianEmail());
+                output.println(service.getTitle());
+                output.println(service.getDescription());
+                output.println(service.getPrice());
+                output.println(service.getServiceArea());
+                output.println();
+            }
+            output.close();
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(null, "Database Error " + ex.getMessage());
+        }
+    }
+
     // feedbacks
     public static Feedback[] getFeedbacks() {
         Feedback[] arrayFeedbacks = new Feedback[] {};
@@ -168,9 +208,6 @@ public class Database {
         }
     }
     
-    // services
-    public static Service[] getServices() {
-        Service[] arrayServices = new Service[] {};
-        return services.toArray(arrayServices);
-    }
+    
+
 }

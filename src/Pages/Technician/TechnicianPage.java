@@ -6,6 +6,7 @@
 package Pages.Technician;
 
 import homeappservice.HomeAppService;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -145,6 +146,7 @@ public class TechnicianPage extends javax.swing.JFrame {
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null,"This system is closing now");
         System.exit(0);
     }//GEN-LAST:event_ExitButtonActionPerformed
 

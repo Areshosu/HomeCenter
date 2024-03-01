@@ -80,7 +80,7 @@ public class Service {
 
     public void setServiceArea(String serviceArea) {
         this.serviceArea = serviceArea;
-    }
+    } 
     
     @Override
     public String toString() {
