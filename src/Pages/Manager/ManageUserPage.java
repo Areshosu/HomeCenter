@@ -9,7 +9,7 @@ import Helper.DeselectOnReselectModel;
 import Helper.SharedHelper;
 import Models.Database;
 import Models.User;
-import Pages.MainMenuPage;
+import Pages.LoginPage;
 import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
@@ -97,11 +97,10 @@ public class ManageUserPage extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        userTable = new javax.swing.JTable();
-        createUpdateBtn = new javax.swing.JButton();
-        usernameField = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        BackBtn = new javax.swing.JButton();
         usernameLabel = new javax.swing.JLabel();
+        usernameField = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JTextField();
         phoneLabel = new javax.swing.JLabel();
@@ -110,16 +109,102 @@ public class ManageUserPage extends javax.swing.JFrame {
         emailField = new javax.swing.JTextField();
         addressLabel = new javax.swing.JLabel();
         addressField = new javax.swing.JTextField();
-        userListingLabel = new javax.swing.JLabel();
         roleLabel = new javax.swing.JLabel();
         roleField = new javax.swing.JComboBox<>();
-        BackBtn = new javax.swing.JButton();
+        createUpdateBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        userTable = new javax.swing.JTable();
+        userListingLabel = new javax.swing.JLabel();
         formMessage = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MANAGE USER PAGE");
+        setPreferredSize(new java.awt.Dimension(860, 600));
 
+        jPanel1.setBackground(new java.awt.Color(35, 57, 91));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+
+        BackBtn.setBackground(new java.awt.Color(64, 110, 142));
+        BackBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        BackBtn.setForeground(new java.awt.Color(255, 255, 255));
+        BackBtn.setText("Back");
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackBtnActionPerformed(evt);
+            }
+        });
+
+        usernameLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        usernameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        usernameLabel.setText("Username");
+
+        usernameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameFieldActionPerformed(evt);
+            }
+        });
+
+        passwordLabel.setBackground(new java.awt.Color(255, 255, 255));
+        passwordLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        passwordLabel.setForeground(new java.awt.Color(255, 255, 255));
+        passwordLabel.setText("Password");
+
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
+            }
+        });
+
+        phoneLabel.setBackground(new java.awt.Color(255, 255, 255));
+        phoneLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        phoneLabel.setForeground(new java.awt.Color(255, 255, 255));
+        phoneLabel.setText("Phone Number");
+
+        phoneField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneFieldActionPerformed(evt);
+            }
+        });
+
+        emailLabel.setBackground(new java.awt.Color(255, 255, 255));
+        emailLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        emailLabel.setForeground(new java.awt.Color(255, 255, 255));
+        emailLabel.setText("Email ");
+
+        addressLabel.setBackground(new java.awt.Color(255, 255, 255));
+        addressLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        addressLabel.setForeground(new java.awt.Color(255, 255, 255));
+        addressLabel.setText("Address");
+
+        addressField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addressFieldActionPerformed(evt);
+            }
+        });
+
+        roleLabel.setBackground(new java.awt.Color(255, 255, 255));
+        roleLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        roleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        roleLabel.setText("Role");
+
+        roleField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        roleField.setForeground(new java.awt.Color(0, 0, 0));
+        roleField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        createUpdateBtn.setBackground(new java.awt.Color(64, 110, 142));
+        createUpdateBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        createUpdateBtn.setForeground(new java.awt.Color(255, 255, 255));
+        createUpdateBtn.setText("CREATE/UPDATE");
+        createUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createUpdateBtnActionPerformed(evt);
+            }
+        });
+
+        userTable.setBackground(new java.awt.Color(64, 110, 142));
+        userTable.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
         userTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -143,145 +228,114 @@ public class ManageUserPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        userTable.setColumnSelectionAllowed(true);
-        userTable.setPreferredSize(new java.awt.Dimension(375, 240));
+        userTable.setGridColor(new java.awt.Color(64, 110, 142));
+        userTable.setMinimumSize(new java.awt.Dimension(80, 0));
+        userTable.setPreferredSize(new java.awt.Dimension(385, 435));
+        userTable.setSelectionBackground(new java.awt.Color(142, 168, 195));
+        userTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(userTable);
-        userTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        createUpdateBtn.setText("CREATE/UPDATE");
-        createUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createUpdateBtnActionPerformed(evt);
-            }
-        });
-
-        usernameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameFieldActionPerformed(evt);
-            }
-        });
-
-        usernameLabel.setText("Username");
-
-        passwordLabel.setText("Password");
-
-        passwordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFieldActionPerformed(evt);
-            }
-        });
-
-        phoneLabel.setText("Phone Number");
-
-        phoneField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phoneFieldActionPerformed(evt);
-            }
-        });
-
-        emailLabel.setText("Email ");
-
-        addressLabel.setText("Address");
-
-        addressField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addressFieldActionPerformed(evt);
-            }
-        });
-
+        userListingLabel.setBackground(new java.awt.Color(255, 255, 255));
+        userListingLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        userListingLabel.setForeground(new java.awt.Color(255, 255, 255));
         userListingLabel.setText("USER LISTINGS");
 
-        roleLabel.setText("Role");
+        formMessage.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
 
-        roleField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(roleField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addressField)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(phoneLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(emailLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(addressLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(roleLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(emailField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(phoneField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usernameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BackBtn)
+                            .addComponent(usernameLabel)))
+                    .addComponent(createUpdateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(formMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
+                        .addGap(50, 50, 50))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(userListingLabel)
+                        .addGap(27, 27, 27))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 22, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BackBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(userListingLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(usernameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(passwordLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(phoneLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emailLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(addressLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(roleLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(roleField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(createUpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(formMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 26, Short.MAX_VALUE))
+        );
 
-        BackBtn.setText("Back");
-        BackBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackBtnActionPerformed(evt);
-            }
-        });
+        emailLabel.getAccessibleContext().setAccessibleDescription("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BackBtn)
-                        .addGap(142, 142, 142))
-                    .addComponent(roleField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addressField)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(phoneLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(emailLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(addressLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(roleLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(emailField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(phoneField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(usernameField, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addComponent(createUpdateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(formMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(215, 487, Short.MAX_VALUE)
-                        .addComponent(userListingLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(12, 12, 12)))
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(BackBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(usernameLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(passwordLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(phoneLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(emailLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addressLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(roleLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(roleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(createUpdateBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(formMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(userListingLabel)
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
-
-        emailLabel.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -340,7 +394,7 @@ public class ManageUserPage extends javax.swing.JFrame {
 
     private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
         this.setVisible(false);
-        MainMenuPage.managerPage.setVisible(true);
+        LoginPage.managerPage.setVisible(true);
     }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
@@ -394,6 +448,7 @@ public class ManageUserPage extends javax.swing.JFrame {
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel formMessage;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel passwordLabel;

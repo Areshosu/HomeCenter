@@ -7,7 +7,7 @@ package Pages.Manager;
 
 import Models.Database;
 import Models.Feedback;
-import Pages.MainMenuPage;
+import Pages.LoginPage;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -50,13 +50,31 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        feedbackTable = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         BackBtn = new javax.swing.JButton();
         feedbackLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        feedbackTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(35, 57, 91));
+
+        BackBtn.setBackground(new java.awt.Color(64, 110, 142));
+        BackBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        BackBtn.setForeground(new java.awt.Color(255, 255, 255));
+        BackBtn.setText("Back");
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackBtnActionPerformed(evt);
+            }
+        });
+
+        feedbackLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        feedbackLabel.setForeground(new java.awt.Color(255, 255, 255));
+        feedbackLabel.setText("User Feedbacks");
+
+        feedbackTable.setBackground(new java.awt.Color(64, 110, 142));
         feedbackTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -80,43 +98,45 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        feedbackTable.setGridColor(new java.awt.Color(64, 110, 142));
+        feedbackTable.setPreferredSize(new java.awt.Dimension(375, 280));
         jScrollPane1.setViewportView(feedbackTable);
 
-        BackBtn.setText("Back");
-        BackBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackBtnActionPerformed(evt);
-            }
-        });
-
-        feedbackLabel.setText("User Feedbacks");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(BackBtn)
+                        .addGap(189, 189, 189)
+                        .addComponent(feedbackLabel))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BackBtn)
+                    .addComponent(feedbackLabel))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BackBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(feedbackLabel)
-                        .addGap(22, 22, 22))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BackBtn)
-                    .addComponent(feedbackLabel))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -124,7 +144,7 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
 
     private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
         this.setVisible(false);
-        MainMenuPage.managerPage.setVisible(true);
+        LoginPage.managerPage.setVisible(true);
     }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
@@ -166,6 +186,7 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
     private javax.swing.JButton BackBtn;
     private javax.swing.JLabel feedbackLabel;
     private javax.swing.JTable feedbackTable;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
