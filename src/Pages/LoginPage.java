@@ -80,19 +80,19 @@ public class LoginPage extends javax.swing.JFrame {
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(leftPanelLayout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(campusLogo))
-                    .addGroup(leftPanelLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(descriptionLabel))
                     .addGroup(leftPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(termsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(termsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(leftPanelLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titleLabel)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftPanelLayout.createSequentialGroup()
+                                .addComponent(campusLogo)
+                                .addGap(13, 13, 13)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(titleLabel)
-                .addGap(82, 82, 82))
         );
         leftPanelLayout.setVerticalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,6 +206,7 @@ public class LoginPage extends javax.swing.JFrame {
             }else if (user.getRole().equals("technician")){
                 technicianPage = new TechnicianPage();
                 technicianPage.setVisible(true);
+                technicianPage.setLoginEmail(user.getEmailAddress());
                 this.setVisible(false);
             emailField.setText("");
             passwordField.setText("");

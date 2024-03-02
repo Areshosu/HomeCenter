@@ -6,13 +6,22 @@
 package Pages.Technician;
 
 import homeappservice.HomeAppService;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author yyhao0422
+ * @author sphal
  */
 public class TechnicianPage extends javax.swing.JFrame {
+    public static ManageServicePage manageServicePage;
+    private String loginEmail;
+
+    public String getLoginEmail() {
+        return loginEmail;
+    }
+
+    public void setLoginEmail(String loginEmail) {
+        this.loginEmail = loginEmail;
+    }
 
     /**
      * Creates new form TechnicianPage
@@ -30,152 +39,514 @@ public class TechnicianPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        ExitButton = new javax.swing.JButton();
-        ViewServiceButton = new javax.swing.JButton();
-        AccountDetailButton = new javax.swing.JButton();
-        ViewAppointmentButton = new javax.swing.JButton();
-        PaymentHistoryButton = new javax.swing.JButton();
-        FeedbackButton = new javax.swing.JButton();
-        LogoutButton = new javax.swing.JButton();
+        darkBluePanel = new javax.swing.JPanel();
+        bluePanel = new javax.swing.JPanel();
+        leftPanel = new javax.swing.JPanel();
+        leftContentLabel = new javax.swing.JLabel();
+        leftHeadingLabel = new javax.swing.JLabel();
+        rightPanel = new javax.swing.JPanel();
+        rightContentLabel = new javax.swing.JLabel();
+        rightHeadingLabel = new javax.swing.JLabel();
+        middlePanel = new javax.swing.JPanel();
+        janLabel = new javax.swing.JLabel();
+        febLabel = new javax.swing.JLabel();
+        marchLabel = new javax.swing.JLabel();
+        aprilLabel = new javax.swing.JLabel();
+        mayLabel = new javax.swing.JLabel();
+        juneLabel = new javax.swing.JLabel();
+        julyLabel = new javax.swing.JLabel();
+        augLabel = new javax.swing.JLabel();
+        sepLabel = new javax.swing.JLabel();
+        octLabel = new javax.swing.JLabel();
+        novLabel = new javax.swing.JLabel();
+        decLabel = new javax.swing.JLabel();
+        janField = new javax.swing.JLabel();
+        febField = new javax.swing.JLabel();
+        marchField = new javax.swing.JLabel();
+        aprilField = new javax.swing.JLabel();
+        mayField = new javax.swing.JLabel();
+        juneField = new javax.swing.JLabel();
+        julyField = new javax.swing.JLabel();
+        augField = new javax.swing.JLabel();
+        octField = new javax.swing.JLabel();
+        novField = new javax.swing.JLabel();
+        decField = new javax.swing.JLabel();
+        sepField = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        appointmentsTable = new javax.swing.JTable();
+        dashboardLabel = new javax.swing.JLabel();
+        logoutBtn = new javax.swing.JLabel();
+        serviceBtn = new javax.swing.JButton();
+        appointmentBtn = new javax.swing.JButton();
+        paymentBtn = new javax.swing.JButton();
+        feedbackBtn = new javax.swing.JButton();
+        manageAccBtn = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("DASHBOARD");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Technician Page");
+        darkBluePanel.setBackground(new java.awt.Color(22, 25, 37));
 
-        ExitButton.setText("Exit");
-        ExitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitButtonActionPerformed(evt);
+        bluePanel.setBackground(new java.awt.Color(35, 57, 91));
+
+        leftPanel.setBackground(new java.awt.Color(64, 110, 142));
+
+        leftContentLabel.setFont(new java.awt.Font("Perpetua Titling MT", 1, 24)); // NOI18N
+        leftContentLabel.setForeground(new java.awt.Color(255, 255, 255));
+        leftContentLabel.setText("RM 0.00");
+
+        leftHeadingLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        leftHeadingLabel.setForeground(new java.awt.Color(255, 255, 255));
+        leftHeadingLabel.setText("TOTAL SALES CURRENT MONTH:");
+
+        javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
+        leftPanel.setLayout(leftPanelLayout);
+        leftPanelLayout.setHorizontalGroup(
+            leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(leftContentLabel)
+                .addContainerGap())
+            .addGroup(leftPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(leftHeadingLabel)
+                .addContainerGap(112, Short.MAX_VALUE))
+        );
+        leftPanelLayout.setVerticalGroup(
+            leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(leftHeadingLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(leftContentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        rightPanel.setBackground(new java.awt.Color(64, 110, 142));
+
+        rightContentLabel.setFont(new java.awt.Font("Perpetua Titling MT", 1, 24)); // NOI18N
+        rightContentLabel.setForeground(new java.awt.Color(255, 255, 255));
+        rightContentLabel.setText("RM 0.00");
+
+        rightHeadingLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        rightHeadingLabel.setForeground(new java.awt.Color(255, 255, 255));
+        rightHeadingLabel.setText("TOTAL SALES THIS YEAR:");
+
+        javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
+        rightPanel.setLayout(rightPanelLayout);
+        rightPanelLayout.setHorizontalGroup(
+            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rightContentLabel)
+                .addContainerGap())
+            .addGroup(rightPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rightHeadingLabel)
+                .addContainerGap(148, Short.MAX_VALUE))
+        );
+        rightPanelLayout.setVerticalGroup(
+            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rightHeadingLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(rightContentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        middlePanel.setBackground(new java.awt.Color(64, 110, 142));
+
+        janLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        janLabel.setForeground(new java.awt.Color(255, 255, 255));
+        janLabel.setText("January");
+
+        febLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        febLabel.setForeground(new java.awt.Color(255, 255, 255));
+        febLabel.setText("FebRuary");
+
+        marchLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        marchLabel.setForeground(new java.awt.Color(255, 255, 255));
+        marchLabel.setText("march");
+
+        aprilLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        aprilLabel.setForeground(new java.awt.Color(255, 255, 255));
+        aprilLabel.setText("APRIL");
+
+        mayLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        mayLabel.setForeground(new java.awt.Color(255, 255, 255));
+        mayLabel.setText("MAY");
+
+        juneLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        juneLabel.setForeground(new java.awt.Color(255, 255, 255));
+        juneLabel.setText("june");
+
+        julyLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        julyLabel.setForeground(new java.awt.Color(255, 255, 255));
+        julyLabel.setText("JULY");
+
+        augLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        augLabel.setForeground(new java.awt.Color(255, 255, 255));
+        augLabel.setText("AUGUST");
+
+        sepLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        sepLabel.setForeground(new java.awt.Color(255, 255, 255));
+        sepLabel.setText("SEPTEMBER");
+
+        octLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        octLabel.setForeground(new java.awt.Color(255, 255, 255));
+        octLabel.setText("OCTOBER");
+
+        novLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        novLabel.setForeground(new java.awt.Color(255, 255, 255));
+        novLabel.setText("NOVEMBER");
+
+        decLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        decLabel.setForeground(new java.awt.Color(255, 255, 255));
+        decLabel.setText("DECEMBER");
+
+        janField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        janField.setForeground(new java.awt.Color(255, 255, 255));
+        janField.setText("rm 0.00");
+
+        febField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        febField.setForeground(new java.awt.Color(255, 255, 255));
+        febField.setText("rm 0.00");
+
+        marchField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        marchField.setForeground(new java.awt.Color(255, 255, 255));
+        marchField.setText("rm 0.00");
+
+        aprilField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        aprilField.setForeground(new java.awt.Color(255, 255, 255));
+        aprilField.setText("rm 0.00");
+
+        mayField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        mayField.setForeground(new java.awt.Color(255, 255, 255));
+        mayField.setText("rm 0.00");
+
+        juneField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        juneField.setForeground(new java.awt.Color(255, 255, 255));
+        juneField.setText("rm 0.00");
+
+        julyField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        julyField.setForeground(new java.awt.Color(255, 255, 255));
+        julyField.setText("rm 0.00");
+
+        augField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        augField.setForeground(new java.awt.Color(255, 255, 255));
+        augField.setText("rm 0.00");
+
+        octField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        octField.setForeground(new java.awt.Color(255, 255, 255));
+        octField.setText("rm 0.00");
+
+        novField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        novField.setForeground(new java.awt.Color(255, 255, 255));
+        novField.setText("rm 0.00");
+
+        decField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        decField.setForeground(new java.awt.Color(255, 255, 255));
+        decField.setText("rm 0.00");
+
+        sepField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        sepField.setForeground(new java.awt.Color(255, 255, 255));
+        sepField.setText("rm 0.00");
+
+        javax.swing.GroupLayout middlePanelLayout = new javax.swing.GroupLayout(middlePanel);
+        middlePanel.setLayout(middlePanelLayout);
+        middlePanelLayout.setHorizontalGroup(
+            middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(middlePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(middlePanelLayout.createSequentialGroup()
+                        .addComponent(janLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(janField))
+                    .addGroup(middlePanelLayout.createSequentialGroup()
+                        .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(febLabel)
+                            .addComponent(marchLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(febField)
+                            .addComponent(marchField))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(middlePanelLayout.createSequentialGroup()
+                        .addComponent(juneLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(juneField))
+                    .addGroup(middlePanelLayout.createSequentialGroup()
+                        .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(aprilLabel)
+                            .addComponent(mayLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mayField)
+                            .addComponent(aprilField))))
+                .addGap(31, 31, 31)
+                .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(middlePanelLayout.createSequentialGroup()
+                        .addComponent(sepLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(sepField)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, middlePanelLayout.createSequentialGroup()
+                        .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(middlePanelLayout.createSequentialGroup()
+                                .addComponent(augLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                                .addComponent(augField))
+                            .addGroup(middlePanelLayout.createSequentialGroup()
+                                .addComponent(julyLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(julyField)))
+                        .addGap(38, 38, 38)))
+                .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(middlePanelLayout.createSequentialGroup()
+                        .addComponent(novLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(novField))
+                    .addGroup(middlePanelLayout.createSequentialGroup()
+                        .addComponent(octLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(octField))
+                    .addGroup(middlePanelLayout.createSequentialGroup()
+                        .addComponent(decLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(decField)))
+                .addGap(44, 44, 44))
+        );
+        middlePanelLayout.setVerticalGroup(
+            middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, middlePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(janLabel)
+                    .addComponent(aprilLabel)
+                    .addComponent(julyLabel)
+                    .addComponent(octLabel)
+                    .addComponent(janField)
+                    .addComponent(aprilField)
+                    .addComponent(julyField)
+                    .addComponent(octField))
+                .addGap(18, 18, 18)
+                .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(febLabel)
+                    .addComponent(mayLabel)
+                    .addComponent(augLabel)
+                    .addComponent(novLabel)
+                    .addComponent(febField)
+                    .addComponent(mayField)
+                    .addComponent(augField)
+                    .addComponent(novField))
+                .addGap(18, 18, 18)
+                .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(marchLabel)
+                    .addComponent(juneLabel)
+                    .addComponent(sepLabel)
+                    .addComponent(decLabel)
+                    .addComponent(marchField)
+                    .addComponent(juneField)
+                    .addComponent(decField)
+                    .addComponent(sepField))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        appointmentsTable.setBackground(new java.awt.Color(22, 25, 37));
+        appointmentsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Service Name", "Customer Email", "Starting Date Time", "Ending Date Time"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        appointmentsTable.setGridColor(new java.awt.Color(22, 25, 37));
+        appointmentsTable.setPreferredSize(new java.awt.Dimension(300, 145));
+        jScrollPane1.setViewportView(appointmentsTable);
+
+        dashboardLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        dashboardLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dashboardLabel.setText("DASHBOARD");
+
+        logoutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logout.png"))); // NOI18N
+        logoutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutBtnMouseClicked(evt);
             }
         });
 
-        ViewServiceButton.setText("View Services");
-        ViewServiceButton.setActionCommand("");
-        ViewServiceButton.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout bluePanelLayout = new javax.swing.GroupLayout(bluePanel);
+        bluePanel.setLayout(bluePanelLayout);
+        bluePanelLayout.setHorizontalGroup(
+            bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bluePanelLayout.createSequentialGroup()
+                .addGroup(bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bluePanelLayout.createSequentialGroup()
+                        .addGap(254, 254, 254)
+                        .addComponent(dashboardLabel)
+                        .addGap(212, 212, 212)
+                        .addComponent(logoutBtn))
+                    .addGroup(bluePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bluePanelLayout.createSequentialGroup()
+                                .addComponent(leftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(bluePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(middlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        bluePanelLayout.setVerticalGroup(
+            bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bluePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dashboardLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(leftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(middlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        serviceBtn.setBackground(new java.awt.Color(51, 51, 51));
+        serviceBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        serviceBtn.setForeground(new java.awt.Color(255, 255, 255));
+        serviceBtn.setText("Services");
+        serviceBtn.setBorderPainted(false);
+        serviceBtn.setOpaque(false);
+        serviceBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ViewServiceButtonActionPerformed(evt);
+                serviceBtnActionPerformed(evt);
             }
         });
 
-        AccountDetailButton.setText("Account Details");
-        AccountDetailButton.setActionCommand("");
-        AccountDetailButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AccountDetailButtonActionPerformed(evt);
-            }
-        });
+        appointmentBtn.setBackground(new java.awt.Color(51, 51, 51));
+        appointmentBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        appointmentBtn.setForeground(new java.awt.Color(255, 255, 255));
+        appointmentBtn.setText("Appointments");
+        appointmentBtn.setBorderPainted(false);
+        appointmentBtn.setOpaque(false);
 
-        ViewAppointmentButton.setText("ViewAppointmentButton");
-        ViewAppointmentButton.setActionCommand("");
-        ViewAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ViewAppointmentButtonActionPerformed(evt);
-            }
-        });
+        paymentBtn.setBackground(new java.awt.Color(51, 51, 51));
+        paymentBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        paymentBtn.setForeground(new java.awt.Color(255, 255, 255));
+        paymentBtn.setText("Payments");
+        paymentBtn.setBorderPainted(false);
+        paymentBtn.setOpaque(false);
 
-        PaymentHistoryButton.setText("Payments History");
-        PaymentHistoryButton.setActionCommand("");
-        PaymentHistoryButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PaymentHistoryButtonActionPerformed(evt);
-            }
-        });
+        feedbackBtn.setBackground(new java.awt.Color(51, 51, 51));
+        feedbackBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        feedbackBtn.setForeground(new java.awt.Color(255, 255, 255));
+        feedbackBtn.setText("Feedbacks");
+        feedbackBtn.setBorderPainted(false);
+        feedbackBtn.setOpaque(false);
 
-        FeedbackButton.setText("View Feedbacks");
-        FeedbackButton.setActionCommand("");
-        FeedbackButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FeedbackButtonActionPerformed(evt);
-            }
-        });
+        manageAccBtn.setBackground(new java.awt.Color(51, 51, 51));
+        manageAccBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        manageAccBtn.setForeground(new java.awt.Color(255, 255, 255));
+        manageAccBtn.setText("<html>Manage<br>Account</html>");
+        manageAccBtn.setBorderPainted(false);
+        manageAccBtn.setOpaque(false);
 
-        LogoutButton.setText("Logout");
-        LogoutButton.setActionCommand("");
-        LogoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutButtonActionPerformed(evt);
-            }
-        });
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+
+        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
+
+        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
+
+        jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout darkBluePanelLayout = new javax.swing.GroupLayout(darkBluePanel);
+        darkBluePanel.setLayout(darkBluePanelLayout);
+        darkBluePanelLayout.setHorizontalGroup(
+            darkBluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, darkBluePanelLayout.createSequentialGroup()
+                .addGroup(darkBluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(darkBluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(serviceBtn)
+                        .addComponent(appointmentBtn)
+                        .addComponent(paymentBtn)
+                        .addComponent(feedbackBtn)
+                        .addComponent(manageAccBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(darkBluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bluePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        darkBluePanelLayout.setVerticalGroup(
+            darkBluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bluePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(darkBluePanelLayout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(serviceBtn)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(appointmentBtn)
+                .addGap(24, 24, 24)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(paymentBtn)
+                .addGap(24, 24, 24)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(feedbackBtn)
+                .addGap(24, 24, 24)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(manageAccBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AccountDetailButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(FeedbackButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ViewServiceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PaymentHistoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ViewAppointmentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LogoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
-                .addGap(0, 264, Short.MAX_VALUE))
+            .addComponent(darkBluePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(ViewServiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ViewAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PaymentHistoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(FeedbackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(AccountDetailButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+            .addComponent(darkBluePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"This system is closing now");
-        System.exit(0);
-    }//GEN-LAST:event_ExitButtonActionPerformed
+    private void serviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviceBtnActionPerformed
+        this.setVisible(false);
+        manageServicePage = new ManageServicePage();
+    }//GEN-LAST:event_serviceBtnActionPerformed
 
-    private void ViewServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewServiceButtonActionPerformed
-        // TODO add your handling code here:
-        new ViewServicesPage().setVisible(true);
-    }//GEN-LAST:event_ViewServiceButtonActionPerformed
-
-    private void AccountDetailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccountDetailButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AccountDetailButtonActionPerformed
-
-    private void ViewAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAppointmentButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ViewAppointmentButtonActionPerformed
-
-    private void PaymentHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentHistoryButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PaymentHistoryButtonActionPerformed
-
-    private void FeedbackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeedbackButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FeedbackButtonActionPerformed
-
-    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
-        // TODO add your handling code here:
+    private void logoutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutBtnMouseClicked
         this.setVisible(false);
         HomeAppService.loginPage.setVisible(true);
-    }//GEN-LAST:event_LogoutButtonActionPerformed
+    }//GEN-LAST:event_logoutBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -213,13 +584,51 @@ public class TechnicianPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AccountDetailButton;
-    private javax.swing.JButton ExitButton;
-    private javax.swing.JButton FeedbackButton;
-    private javax.swing.JButton LogoutButton;
-    private javax.swing.JButton PaymentHistoryButton;
-    private javax.swing.JButton ViewAppointmentButton;
-    private javax.swing.JButton ViewServiceButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton appointmentBtn;
+    private javax.swing.JTable appointmentsTable;
+    private javax.swing.JLabel aprilField;
+    private javax.swing.JLabel aprilLabel;
+    private javax.swing.JLabel augField;
+    private javax.swing.JLabel augLabel;
+    private javax.swing.JPanel bluePanel;
+    private javax.swing.JPanel darkBluePanel;
+    private javax.swing.JLabel dashboardLabel;
+    private javax.swing.JLabel decField;
+    private javax.swing.JLabel decLabel;
+    private javax.swing.JLabel febField;
+    private javax.swing.JLabel febLabel;
+    private javax.swing.JButton feedbackBtn;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JLabel janField;
+    private javax.swing.JLabel janLabel;
+    private javax.swing.JLabel julyField;
+    private javax.swing.JLabel julyLabel;
+    private javax.swing.JLabel juneField;
+    private javax.swing.JLabel juneLabel;
+    private javax.swing.JLabel leftContentLabel;
+    private javax.swing.JLabel leftHeadingLabel;
+    private javax.swing.JPanel leftPanel;
+    private javax.swing.JLabel logoutBtn;
+    private javax.swing.JButton manageAccBtn;
+    private javax.swing.JLabel marchField;
+    private javax.swing.JLabel marchLabel;
+    private javax.swing.JLabel mayField;
+    private javax.swing.JLabel mayLabel;
+    private javax.swing.JPanel middlePanel;
+    private javax.swing.JLabel novField;
+    private javax.swing.JLabel novLabel;
+    private javax.swing.JLabel octField;
+    private javax.swing.JLabel octLabel;
+    private javax.swing.JButton paymentBtn;
+    private javax.swing.JLabel rightContentLabel;
+    private javax.swing.JLabel rightHeadingLabel;
+    private javax.swing.JPanel rightPanel;
+    private javax.swing.JLabel sepField;
+    private javax.swing.JLabel sepLabel;
+    private javax.swing.JButton serviceBtn;
     // End of variables declaration//GEN-END:variables
 }
