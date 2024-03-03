@@ -195,6 +195,10 @@ public class Database {
         appointments.set(index, appointment);
     }
     
+    public static void removeAppointment(int index) {
+        appointments.remove(index);
+    }
+    
     public static void writeToAppointments() {
         try {
             PrintWriter output = new PrintWriter(getDBFolder() + "appointments.txt");

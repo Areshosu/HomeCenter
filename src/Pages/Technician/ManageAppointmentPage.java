@@ -5,20 +5,31 @@
  */
 package Pages.Technician;
 
+import Helper.ConfirmationPopup;
 import Helper.DeselectOnReselectModel;
 import Helper.SharedHelper;
+import Helper.TableActionCellRenderer;
+import Helper.WithConfirmPopup;
+import Models.Appointment;
 import Models.Database;
 import Models.Service;
 import Models.User;
+import Pages.LoginPage;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.time.LocalDateTime;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author sphal
  */
-public class ManageAppointmentPage extends javax.swing.JFrame {
+public class ManageAppointmentPage extends javax.swing.JFrame implements WithConfirmPopup {
+    private static final String dateTimeFieldPlaceHolder = "eg. (12/03/2005, 5:10PM)";
     private int selectedRowIndex = -1;
 
     /**
@@ -26,13 +37,23 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
      */
     public ManageAppointmentPage() {
         initComponents();
+        this.setVisible(true);
         DefaultComboBoxModel customers = new DefaultComboBoxModel();
+        DefaultComboBoxModel services = new DefaultComboBoxModel();
         for (User user: Database.getUsers()) {
             if (user.getRole().equals("customer")) {
                 customers.addElement(user);
             }
         }
+        for (Service service: Database.getServices()) {
+            if (service.getTechnicianEmail().equals(LoginPage.technicianPage.getLoginEmail())) {
+                services.addElement(service);
+            }
+        }
+        
         custEmailField.setModel(customers);
+        serviceNameField.setModel(services);
+        
         appointmentTable.setSelectionModel(new DeselectOnReselectModel());
         appointmentTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
@@ -44,8 +65,8 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
                     if (appointmentTable.getSelectedRow() == -1) {
                         serviceNameField.setSelectedIndex(0);
                         custEmailField.setSelectedIndex(0);
-                        startDateField.setText("");
-                        endDateField.setText("");
+                        startDateField.setText(dateTimeFieldPlaceHolder);
+                        endDateField.setText(dateTimeFieldPlaceHolder);
                         return;
                     }
                     selectedRowIndex = appointmentTable.getSelectedRow();
@@ -59,6 +80,50 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
                     }
             }
         });
+        
+        ManageAppointmentPage self = this;
+        appointmentTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int column = appointmentTable.columnAtPoint(e.getPoint());
+                if (column == 4) {
+                    new ConfirmationPopup(self);
+                }
+            }
+        });
+    }
+    
+    @Override
+    public void runCallbackForConfirmPopup() {
+        Database.removeAppointment(this.selectedRowIndex);
+        Database.writeToAppointments();
+        refreshTable();
+        formMessage.setText("Deleted successfully!");
+        formMessage.setForeground(Color.GREEN);        
+    }
+    
+    @Override
+    public void setVisible(boolean b) {
+        super.setVisible(b);
+        refreshTable();
+    }
+    
+    public void refreshTable() {
+    String[] columns = {"Service Name", "Cust Email", "Start DateTime", "End DateTime", "Action"};
+    DefaultTableModel appointmentTableModel = new DefaultTableModel(columns, 0);
+    TableActionCellRenderer actionRenderer = new TableActionCellRenderer();
+    for (Appointment appointment: Database.getAppointments()) {
+        if (appointment.getTechnicianEmail().equals(LoginPage.technicianPage.getLoginEmail())) {
+            appointmentTableModel.addRow(new Object[] {
+            appointment.getServiceName(),
+            appointment.getCustomerEmail(),
+            SharedHelper.dateToString(appointment.getStartingDateTime()),
+            SharedHelper.dateToString(appointment.getEndingDateTime())
+        });
+        }
+    }
+        appointmentTable.setModel(appointmentTableModel);
+        appointmentTable.getColumn("Action").setCellRenderer(actionRenderer);
     }
 
     /**
@@ -89,6 +154,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
         custEmailField = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MANAGE APPOINTMENT");
 
         jPanel1.setBackground(new java.awt.Color(35, 57, 91));
 
@@ -98,20 +164,43 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Service Name", "Cust Email", "Start DateTime", "End DateTime"
+                "Service Name", "Cust Email", "Start DateTime", "End DateTime", "Action"
             }
         ));
         appointmentTable.setGridColor(new java.awt.Color(64, 110, 142));
         appointmentTable.setPreferredSize(new java.awt.Dimension(300, 335));
+        appointmentTable.setRowHeight(30);
         bluePanel.setViewportView(appointmentTable);
 
         backBtn.setBackground(new java.awt.Color(64, 110, 142));
         backBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(255, 255, 255));
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         serviceNameLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
         serviceNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         serviceNameLabel.setText("SERVICE NAME");
+
+        startDateField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        startDateField.setText("eg. (12/03/2005, 5:10PM)");
+        startDateField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                startDateFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                startDateFieldFocusLost(evt);
+            }
+        });
+        startDateField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                startDateFieldKeyReleased(evt);
+            }
+        });
 
         endDateLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
         endDateLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -125,9 +214,31 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
         startDateLabel.setForeground(new java.awt.Color(255, 255, 255));
         startDateLabel.setText("STARTING DATE");
 
+        endDateField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        endDateField.setText("eg. (12/03/2005, 5:10PM)");
+        endDateField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                endDateFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                endDateFieldFocusLost(evt);
+            }
+        });
+        endDateField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                endDateFieldKeyReleased(evt);
+            }
+        });
+
         createUpdateBtn.setBackground(new java.awt.Color(64, 110, 142));
         createUpdateBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        createUpdateBtn.setForeground(new java.awt.Color(255, 255, 255));
         createUpdateBtn.setText("CREATE/UPDATE");
+        createUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createUpdateBtnActionPerformed(evt);
+            }
+        });
 
         endDateFieldMsg.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
         endDateFieldMsg.setForeground(new java.awt.Color(255, 0, 0));
@@ -225,6 +336,80 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        this.setVisible(false);
+        LoginPage.technicianPage.setVisible(true);
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    private void createUpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUpdateBtnActionPerformed
+        String serviceTitle = serviceNameField.getSelectedItem().toString();
+        String customerEmail = custEmailField.getSelectedItem().toString();
+        LocalDateTime startDate = SharedHelper.isValidDateTime(startDateField.getText());
+        LocalDateTime endDate = SharedHelper.isValidDateTime(endDateField.getText());
+        
+        if (serviceTitle.length() < 1 ||
+                    customerEmail.length() < 1 ||
+                    startDate == null ||
+                    endDate == null) {
+            formMessage.setText("Invalid details, please try again.");
+            formMessage.setForeground(Color.red);
+            return;
+        }
+        
+        Appointment appointment = new Appointment(serviceTitle, customerEmail, LoginPage.technicianPage.getLoginEmail(), startDate, endDate);
+        if (selectedRowIndex != -1) {
+            Database.updateAppointment(appointment, selectedRowIndex);
+            formMessage.setText("Successfully updated!");
+        } else {
+            Database.addAppointment(appointment);
+            formMessage.setText("Successfully added!");            
+        }
+        
+        Database.writeToAppointments();
+        refreshTable();
+        formMessage.setForeground(Color.green);
+    }//GEN-LAST:event_createUpdateBtnActionPerformed
+
+    private void startDateFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_startDateFieldKeyReleased
+        if (SharedHelper.isValidDateTime(startDateField.getText()) == null) {
+            startDateFieldMsg.setText("Invalid date time");
+        } else {
+            startDateFieldMsg.setText("");
+        }
+    }//GEN-LAST:event_startDateFieldKeyReleased
+
+    private void endDateFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_endDateFieldKeyReleased
+        if (SharedHelper.isValidDateTime(endDateField.getText()) == null) {
+            endDateFieldMsg.setText("Invalid date time");
+        } else {
+            endDateFieldMsg.setText("");
+        }
+    }//GEN-LAST:event_endDateFieldKeyReleased
+
+    private void startDateFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_startDateFieldFocusGained
+        if (startDateField.getText().equals(dateTimeFieldPlaceHolder)) {
+            startDateField.setText("");
+        }
+    }//GEN-LAST:event_startDateFieldFocusGained
+
+    private void startDateFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_startDateFieldFocusLost
+        if (startDateField.getText().equals("")) {
+            startDateField.setText(dateTimeFieldPlaceHolder);
+        }
+    }//GEN-LAST:event_startDateFieldFocusLost
+
+    private void endDateFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_endDateFieldFocusGained
+        if (endDateField.getText().equals(dateTimeFieldPlaceHolder)) {
+            endDateField.setText("");
+        }
+    }//GEN-LAST:event_endDateFieldFocusGained
+
+    private void endDateFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_endDateFieldFocusLost
+        if (endDateField.getText().equals("")) {
+            endDateField.setText(dateTimeFieldPlaceHolder);
+        }
+    }//GEN-LAST:event_endDateFieldFocusLost
 
     /**
      * @param args the command line arguments

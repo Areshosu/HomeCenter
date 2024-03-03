@@ -7,6 +7,7 @@ package homeappservice;
 
 import Models.Database;
 import Pages.LoginPage;
+import Pages.SplashScreen;
 
 /**
  *
@@ -14,12 +15,14 @@ import Pages.LoginPage;
  */
 public class HomeAppService {
     public static LoginPage loginPage;
+    public static SplashScreen splashScreen;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Database.read();
         loginPage = new LoginPage();
+        splashScreen = new SplashScreen();
     }
     
 }

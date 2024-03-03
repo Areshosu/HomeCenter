@@ -13,6 +13,9 @@ import homeappservice.HomeAppService;
  */
 public class TechnicianPage extends javax.swing.JFrame {
     public static ManageServicePage manageServicePage;
+    public static ManageAppointmentPage manageAppointmentPage;
+    public static ManageFeedbackPage manageFeedbackPage;
+    
     private String loginEmail;
 
     public String getLoginEmail() {
@@ -449,6 +452,11 @@ public class TechnicianPage extends javax.swing.JFrame {
         appointmentBtn.setText("Appointments");
         appointmentBtn.setBorderPainted(false);
         appointmentBtn.setOpaque(false);
+        appointmentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentBtnActionPerformed(evt);
+            }
+        });
 
         paymentBtn.setBackground(new java.awt.Color(51, 51, 51));
         paymentBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
@@ -463,6 +471,11 @@ public class TechnicianPage extends javax.swing.JFrame {
         feedbackBtn.setText("Feedbacks");
         feedbackBtn.setBorderPainted(false);
         feedbackBtn.setOpaque(false);
+        feedbackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                feedbackBtnActionPerformed(evt);
+            }
+        });
 
         manageAccBtn.setBackground(new java.awt.Color(51, 51, 51));
         manageAccBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
@@ -547,6 +560,16 @@ public class TechnicianPage extends javax.swing.JFrame {
         this.setVisible(false);
         HomeAppService.loginPage.setVisible(true);
     }//GEN-LAST:event_logoutBtnMouseClicked
+
+    private void appointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentBtnActionPerformed
+        this.setVisible(false);
+        manageAppointmentPage = new ManageAppointmentPage();
+    }//GEN-LAST:event_appointmentBtnActionPerformed
+
+    private void feedbackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_feedbackBtnActionPerformed
+        this.setVisible(false);
+        manageFeedbackPage = new ManageFeedbackPage();
+    }//GEN-LAST:event_feedbackBtnActionPerformed
 
     /**
      * @param args the command line arguments

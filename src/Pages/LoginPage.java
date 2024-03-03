@@ -25,7 +25,6 @@ public class LoginPage extends javax.swing.JFrame {
      */
     public LoginPage() {
         initComponents();
-        this.setVisible(true);
         this.setTitle("(AHHASC) LOGIN PAGE");
     }
 
@@ -53,7 +52,9 @@ public class LoginPage extends javax.swing.JFrame {
         formMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
         setBackground(new java.awt.Color(142, 168, 195));
+        setLocation(new java.awt.Point(200, 200));
         setPreferredSize(new java.awt.Dimension(615, 369));
 
         leftPanel.setBackground(new java.awt.Color(35, 57, 91));

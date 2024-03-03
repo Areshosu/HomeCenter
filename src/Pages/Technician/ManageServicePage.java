@@ -301,8 +301,13 @@ public class ManageServicePage extends javax.swing.JFrame {
             Database.updateService(service, selectedRowIndex);
             formMessage.setText("Successfully updated!");
         } else {
-            Database.addService(service);
-            formMessage.setText("Successfully added!");            
+            if (Database.findService(service.getTitle()) == null) {
+                Database.addService(service);
+                formMessage.setText("Successfully added!");            
+            } else {
+                formMessage.setText("Please use other title!"); 
+                return;
+            }
         }
         
         Database.writeToServices();
