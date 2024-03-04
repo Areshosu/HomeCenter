@@ -9,31 +9,30 @@ New User :D
 123
 60123456789
 alex2@gmail.com
-
+hoho
 customer
 
 New User :D
 123
 60123456789
 alex1@gmail.com
-
+address
 technician
 
 New User :D
 123
 60123456789
 alex3@gmail.com
-
+hooo
 customer
 
 New User :D
 123
 60123456789
 alex@gmail.com
-
+new address
 manager
 
-<<<<<<< HEAD
 yyyhao0422
 1q2w3E*
 0
@@ -44,7 +43,7 @@ customer
 techni
 aaa
 0
-null
+tech@gmail.com
 null
 technician
 
@@ -52,22 +51,20 @@ New User :D
 aaa
 60123456789
 yyh@gmail.com
-
+hyy
 customer
 
 New User :D
 aaa
 60123456789
 techni@gmail.com
-
+hoooo
 technician
 
 New User :D
 aaa
 60123456789
 admin@gmail.com
-
+hh
 manager
 
-=======
->>>>>>> 617f38a37c359272a38f853bcb65e863035362b8
