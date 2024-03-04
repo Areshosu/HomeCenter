@@ -11,7 +11,7 @@ import Models.Appointment;
 import Models.Database;
 import Models.Service;
 import Models.User;
-import Pages.MainMenuPage;
+import Pages.LoginPage;
 import java.awt.Color;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -123,27 +123,123 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        appointmentTable = new javax.swing.JTable();
-        appointmentListingLabel = new javax.swing.JLabel();
+        startDateValidateMsg = new javax.swing.JLabel();
+        endDateValidateMsg = new javax.swing.JLabel();
+        bluePanel = new javax.swing.JPanel();
+        backBtn = new javax.swing.JButton();
         serviceNameLabel = new javax.swing.JLabel();
+        serviceNameField = new javax.swing.JComboBox<>();
         customerEmailLabel = new javax.swing.JLabel();
+        customerEmailField = new javax.swing.JComboBox<>();
         technicianEmailLabel = new javax.swing.JLabel();
+        technicianEmailField = new javax.swing.JComboBox<>();
         startingDateLabel = new javax.swing.JLabel();
         startingDateField = new javax.swing.JTextField();
         endingDateLabel = new javax.swing.JLabel();
         endingDateField = new javax.swing.JTextField();
         createUpdateBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        appointmentTable = new javax.swing.JTable();
+        appointmentListingLabel = new javax.swing.JLabel();
         formMessage = new javax.swing.JLabel();
-        backBtn = new javax.swing.JButton();
-        startDateValidateMsg = new javax.swing.JLabel();
-        endDateValidateMsg = new javax.swing.JLabel();
-        customerEmailField = new javax.swing.JComboBox<>();
-        technicianEmailField = new javax.swing.JComboBox<>();
-        serviceNameField = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MANAGE APPOINTMENT");
 
+        startDateValidateMsg.setForeground(new java.awt.Color(255, 51, 0));
+
+        endDateValidateMsg.setForeground(new java.awt.Color(255, 51, 0));
+
+        bluePanel.setBackground(new java.awt.Color(35, 57, 91));
+
+        backBtn.setBackground(new java.awt.Color(64, 110, 142));
+        backBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(255, 255, 255));
+        backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+
+        serviceNameLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        serviceNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        serviceNameLabel.setText("Service Name");
+
+        serviceNameField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        serviceNameField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        customerEmailLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        customerEmailLabel.setForeground(new java.awt.Color(255, 255, 255));
+        customerEmailLabel.setText("Customer Email");
+
+        customerEmailField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        customerEmailField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        customerEmailField.setToolTipText("");
+
+        technicianEmailLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        technicianEmailLabel.setForeground(new java.awt.Color(255, 255, 255));
+        technicianEmailLabel.setText("Technician Email");
+
+        technicianEmailField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        technicianEmailField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        startingDateLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        startingDateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        startingDateLabel.setText("Starting Date");
+
+        startingDateField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        startingDateField.setText(dateTimeFieldPlaceHolder);
+        startingDateField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                startingDateFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                startingDateFieldFocusLost(evt);
+            }
+        });
+        startingDateField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                startingDateFieldKeyReleased(evt);
+            }
+        });
+
+        endingDateLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        endingDateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        endingDateLabel.setText("Ending Date");
+
+        endingDateField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        endingDateField.setText(dateTimeFieldPlaceHolder);
+        endingDateField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                endingDateFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                endingDateFieldFocusLost(evt);
+            }
+        });
+        endingDateField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endingDateFieldActionPerformed(evt);
+            }
+        });
+        endingDateField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                endingDateFieldKeyReleased(evt);
+            }
+        });
+
+        createUpdateBtn.setBackground(new java.awt.Color(64, 110, 142));
+        createUpdateBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        createUpdateBtn.setForeground(new java.awt.Color(255, 255, 255));
+        createUpdateBtn.setText("CREATE/UPDATE");
+        createUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createUpdateBtnActionPerformed(evt);
+            }
+        });
+
+        appointmentTable.setBackground(new java.awt.Color(64, 110, 142));
         appointmentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -167,168 +263,109 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        appointmentTable.setGridColor(new java.awt.Color(64, 110, 142));
+        appointmentTable.setPreferredSize(new java.awt.Dimension(375, 370));
         jScrollPane1.setViewportView(appointmentTable);
 
+        appointmentListingLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        appointmentListingLabel.setForeground(new java.awt.Color(255, 255, 255));
         appointmentListingLabel.setText("APPOINTMENT LISTING");
 
-        serviceNameLabel.setText("Service Name");
+        formMessage.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
 
-        customerEmailLabel.setText("Customer Email");
-
-        technicianEmailLabel.setText("Technician Email");
-
-        startingDateLabel.setText("Starting Date");
-
-        startingDateField.setText(dateTimeFieldPlaceHolder);
-        startingDateField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                startingDateFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                startingDateFieldFocusLost(evt);
-            }
-        });
-        startingDateField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                startingDateFieldKeyReleased(evt);
-            }
-        });
-
-        endingDateLabel.setText("Ending Date");
-
-        endingDateField.setText(dateTimeFieldPlaceHolder);
-        endingDateField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                endingDateFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                endingDateFieldFocusLost(evt);
-            }
-        });
-        endingDateField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                endingDateFieldActionPerformed(evt);
-            }
-        });
-        endingDateField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                endingDateFieldKeyReleased(evt);
-            }
-        });
-
-        createUpdateBtn.setText("CREATE/UPDATE");
-        createUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createUpdateBtnActionPerformed(evt);
-            }
-        });
-
-        backBtn.setText("Back");
-        backBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backBtnActionPerformed(evt);
-            }
-        });
-
-        startDateValidateMsg.setForeground(new java.awt.Color(255, 51, 0));
-
-        endDateValidateMsg.setForeground(new java.awt.Color(255, 51, 0));
-
-        customerEmailField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        customerEmailField.setToolTipText("");
-
-        technicianEmailField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        serviceNameField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        javax.swing.GroupLayout bluePanelLayout = new javax.swing.GroupLayout(bluePanel);
+        bluePanel.setLayout(bluePanelLayout);
+        bluePanelLayout.setHorizontalGroup(
+            bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bluePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(bluePanelLayout.createSequentialGroup()
+                        .addComponent(backBtn)
+                        .addGap(474, 474, 474)
+                        .addComponent(appointmentListingLabel))
+                    .addGroup(bluePanelLayout.createSequentialGroup()
+                        .addGroup(bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(startingDateLabel)
+                            .addGroup(bluePanelLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(endingDateLabel))
+                            .addComponent(createUpdateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(endingDateField)
+                            .addComponent(startingDateField)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(customerEmailLabel)
+                                .addGroup(bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(technicianEmailField, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(customerEmailField, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(serviceNameLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(technicianEmailLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(serviceNameField, javax.swing.GroupLayout.Alignment.LEADING, 0, 220, Short.MAX_VALUE)))
+                            .addComponent(formMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 115, Short.MAX_VALUE))
+        );
+        bluePanelLayout.setVerticalGroup(
+            bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bluePanelLayout.createSequentialGroup()
+                .addGroup(bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(bluePanelLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(appointmentListingLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(bluePanelLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(backBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(serviceNameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(serviceNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerEmailLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(technicianEmailLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(technicianEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(startingDateLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(startingDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(endingDateLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(endingDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(createUpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(formMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
+                .addComponent(bluePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(appointmentListingLabel)
-                        .addGap(37, 37, 37))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(formMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(17, 17, 17))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(technicianEmailField, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(startingDateField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(endingDateField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(createUpdateBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(startingDateLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(startDateValidateMsg))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(endingDateLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(endDateValidateMsg)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(serviceNameField, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(customerEmailField, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(serviceNameLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(customerEmailLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(technicianEmailLabel, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(12, 12, 12)))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                    .addComponent(startDateValidateMsg)
+                    .addComponent(endDateValidateMsg))
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(appointmentListingLabel)
-                        .addGap(32, 32, 32)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(backBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(serviceNameLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(serviceNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(customerEmailLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(customerEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addComponent(technicianEmailLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(technicianEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(startingDateLabel)
-                            .addComponent(startDateValidateMsg))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(startingDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(endingDateLabel)
-                            .addComponent(endDateValidateMsg))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(endingDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(createUpdateBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(formMessage)
-                        .addGap(0, 11, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(244, 244, 244)
+                .addComponent(startDateValidateMsg)
+                .addGap(59, 59, 59)
+                .addComponent(endDateValidateMsg)
+                .addGap(0, 172, Short.MAX_VALUE))
+            .addComponent(bluePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -377,7 +414,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         this.setVisible(false);
-        MainMenuPage.managerPage.setVisible(true);
+        LoginPage.managerPage.setVisible(true);
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void startingDateFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_startingDateFieldFocusLost
@@ -459,6 +496,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
     private javax.swing.JLabel appointmentListingLabel;
     private javax.swing.JTable appointmentTable;
     private javax.swing.JButton backBtn;
+    private javax.swing.JPanel bluePanel;
     private javax.swing.JButton createUpdateBtn;
     private javax.swing.JComboBox<String> customerEmailField;
     private javax.swing.JLabel customerEmailLabel;

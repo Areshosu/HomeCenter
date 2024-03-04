@@ -5,8 +5,7 @@
  */
 package Pages.Customer;
 
-import Pages.MainMenuPage;
-import java.awt.event.ActionEvent;
+import homeappservice.HomeAppService;
 
 /**
  *
@@ -161,7 +160,7 @@ public class CustomerPage extends javax.swing.JFrame {
     private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new MainMenuPage();
+        HomeAppService.loginPage.setVisible(true);
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
     private void PaymentHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentHistoryButtonActionPerformed

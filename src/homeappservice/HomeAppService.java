@@ -6,20 +6,23 @@
 package homeappservice;
 
 import Models.Database;
-import Pages.MainMenuPage;
+import Pages.LoginPage;
+import Pages.SplashScreen;
 
 /**
  *
  * @author sphal
  */
 public class HomeAppService {
-    public static MainMenuPage mainPage;
+    public static LoginPage loginPage;
+    public static SplashScreen splashScreen;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Database.read();
-        mainPage = new MainMenuPage();
+        loginPage = new LoginPage();
+        splashScreen = new SplashScreen();
     }
     
 }

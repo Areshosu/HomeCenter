@@ -66,6 +66,10 @@ public class Service {
         this.description = description;
     }
 
+    public static String[] getAreas() {
+        return areas;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -80,7 +84,7 @@ public class Service {
 
     public void setServiceArea(String serviceArea) {
         this.serviceArea = serviceArea;
-    } 
+    }
     
     @Override
     public String toString() {

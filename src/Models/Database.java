@@ -137,9 +137,9 @@ public class Database {
         return services.toArray(arrayService);
     }
     
-    public static Service findService(String email){
+    public static Service findService(String title){
         for (Service service: services){
-            if (service.getTechnicianEmail().equals(email)){
+            if (service.getTitle().equals(title)){
                 return service;
             }
         }
@@ -148,6 +148,10 @@ public class Database {
 
     public static void addService(Service service){
         services.add(service);
+    }
+    
+    public static void updateService(Service service, int index) {
+        services.set(index, service);
     }
     
     public static void removeService(String email){
@@ -189,6 +193,10 @@ public class Database {
     
     public static void updateAppointment(Appointment appointment, int index) {
         appointments.set(index, appointment);
+    }
+    
+    public static void removeAppointment(int index) {
+        appointments.remove(index);
     }
     
     public static void writeToAppointments() {

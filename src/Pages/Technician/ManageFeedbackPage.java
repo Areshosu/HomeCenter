@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Pages.Manager;
+package Pages.Technician;
 
 import Models.Database;
 import Models.Feedback;
@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Shiro
+ * @author sphal
  */
 public class ManageFeedbackPage extends javax.swing.JFrame {
 
@@ -21,24 +21,29 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
      */
     public ManageFeedbackPage() {
         initComponents();
+        this.setVisible(true);
     }
     
     @Override
     public void setVisible(boolean b) {
         super.setVisible(b);
-        
-        String[] columns = {"customer", "rating", "message", "technician", "createdAt"};
+        this.refreshTable();
+    }
+    
+    private void refreshTable() {
+        String[] columns = {"Customer Email", "Rating", "Message", "Created DateTime"};
         DefaultTableModel feedbackTableModel = new DefaultTableModel(columns, 0);
-            for (Feedback feedback: Database.getFeedbacks()) {
+        for (Feedback feedback: Database.getFeedbacks()) {
+            if (feedback.getReceiverEmail().equals(LoginPage.technicianPage.getLoginEmail())) {
                 feedbackTableModel.addRow(new Object[] {
-                    feedback.getSenderEmail(),
+                    feedback.getReceiverEmail(),
                     feedback.getRating(),
                     feedback.getMessage(),
-                    feedback.getSenderEmail(),
                     feedback.getCreatedDateTime()
                 });
             }
-            feedbackTable.setModel(feedbackTableModel);
+        feedbackTable.setModel(feedbackTableModel);
+        }
     }
 
     /**
@@ -51,88 +56,88 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
     private void initComponents() {
 
         bluePanel = new javax.swing.JPanel();
-        BackBtn = new javax.swing.JButton();
-        feedbackLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        logoutBtn = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        feedbackTableScrollPane = new javax.swing.JScrollPane();
         feedbackTable = new javax.swing.JTable();
+        headingLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("FEEDBACK");
 
         bluePanel.setBackground(new java.awt.Color(35, 57, 91));
 
-        BackBtn.setBackground(new java.awt.Color(64, 110, 142));
-        BackBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
-        BackBtn.setForeground(new java.awt.Color(255, 255, 255));
-        BackBtn.setText("Back");
-        BackBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackBtnActionPerformed(evt);
+        logoutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logout.png"))); // NOI18N
+        logoutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutBtnMouseClicked(evt);
             }
         });
 
-        feedbackLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
-        feedbackLabel.setForeground(new java.awt.Color(255, 255, 255));
-        feedbackLabel.setText("User Feedbacks");
+        jPanel1.setBackground(new java.awt.Color(22, 25, 37));
 
-        feedbackTable.setBackground(new java.awt.Color(64, 110, 142));
+        feedbackTable.setBackground(new java.awt.Color(22, 25, 37));
         feedbackTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "customer", "rating", "message", "technician", "createdAt"
+                "Customer Email", "Rating", "Message", "Created DateTime"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, true, false, true
-            };
+        ));
+        feedbackTable.setGridColor(new java.awt.Color(22, 25, 37));
+        feedbackTable.setPreferredSize(new java.awt.Dimension(300, 250));
+        feedbackTableScrollPane.setViewportView(feedbackTable);
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+        headingLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 24)); // NOI18N
+        headingLabel.setForeground(new java.awt.Color(255, 255, 255));
+        headingLabel.setText("FEEDBACK");
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        feedbackTable.setGridColor(new java.awt.Color(64, 110, 142));
-        feedbackTable.setPreferredSize(new java.awt.Dimension(375, 280));
-        jScrollPane1.setViewportView(feedbackTable);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(headingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(feedbackTableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(headingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(feedbackTableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
+        );
 
         javax.swing.GroupLayout bluePanelLayout = new javax.swing.GroupLayout(bluePanel);
         bluePanel.setLayout(bluePanelLayout);
         bluePanelLayout.setHorizontalGroup(
             bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bluePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(bluePanelLayout.createSequentialGroup()
-                        .addComponent(BackBtn)
-                        .addGap(189, 189, 189)
-                        .addComponent(feedbackLabel))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(logoutBtn)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         bluePanelLayout.setVerticalGroup(
             bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bluePanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BackBtn)
-                    .addComponent(feedbackLabel))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bluePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoutBtn)
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bluePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bluePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,10 +147,10 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
+    private void logoutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutBtnMouseClicked
         this.setVisible(false);
-        LoginPage.managerPage.setVisible(true);
-    }//GEN-LAST:event_BackBtnActionPerformed
+        LoginPage.technicianPage.setVisible(true);
+    }//GEN-LAST:event_logoutBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -183,10 +188,11 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BackBtn;
     private javax.swing.JPanel bluePanel;
-    private javax.swing.JLabel feedbackLabel;
     private javax.swing.JTable feedbackTable;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane feedbackTableScrollPane;
+    private javax.swing.JLabel headingLabel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel logoutBtn;
     // End of variables declaration//GEN-END:variables
 }
