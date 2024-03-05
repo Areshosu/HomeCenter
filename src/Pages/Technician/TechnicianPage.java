@@ -14,7 +14,9 @@ import homeappservice.HomeAppService;
 public class TechnicianPage extends javax.swing.JFrame {
     public static ManageServicePage manageServicePage;
     public static ManageAppointmentPage manageAppointmentPage;
+    public static ManagePaymentPage managePaymentPage;
     public static ManageFeedbackPage manageFeedbackPage;
+    public static ManageAccountPage manageAccountPage;
     
     private String loginEmail;
 
@@ -277,7 +279,7 @@ public class TechnicianPage extends javax.swing.JFrame {
                         .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(febField)
                             .addComponent(marchField))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(middlePanelLayout.createSequentialGroup()
                         .addComponent(juneLabel)
@@ -302,7 +304,7 @@ public class TechnicianPage extends javax.swing.JFrame {
                         .addGroup(middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(middlePanelLayout.createSequentialGroup()
                                 .addComponent(augLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(augField))
                             .addGroup(middlePanelLayout.createSequentialGroup()
                                 .addComponent(julyLabel)
@@ -361,6 +363,7 @@ public class TechnicianPage extends javax.swing.JFrame {
         );
 
         appointmentsTable.setBackground(new java.awt.Color(22, 25, 37));
+        appointmentsTable.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
         appointmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -379,6 +382,7 @@ public class TechnicianPage extends javax.swing.JFrame {
         });
         appointmentsTable.setGridColor(new java.awt.Color(22, 25, 37));
         appointmentsTable.setPreferredSize(new java.awt.Dimension(300, 145));
+        appointmentsTable.setRowHeight(30);
         jScrollPane1.setViewportView(appointmentsTable);
 
         dashboardLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
@@ -405,15 +409,13 @@ public class TechnicianPage extends javax.swing.JFrame {
                         .addComponent(logoutBtn))
                     .addGroup(bluePanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bluePanelLayout.createSequentialGroup()
+                        .addGroup(bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(middlePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)
+                            .addGroup(bluePanelLayout.createSequentialGroup()
                                 .addComponent(leftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(bluePanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(middlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(rightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         bluePanelLayout.setVerticalGroup(
@@ -430,7 +432,7 @@ public class TechnicianPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(middlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -464,6 +466,11 @@ public class TechnicianPage extends javax.swing.JFrame {
         paymentBtn.setText("Payments");
         paymentBtn.setBorderPainted(false);
         paymentBtn.setOpaque(false);
+        paymentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paymentBtnActionPerformed(evt);
+            }
+        });
 
         feedbackBtn.setBackground(new java.awt.Color(51, 51, 51));
         feedbackBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
@@ -483,6 +490,11 @@ public class TechnicianPage extends javax.swing.JFrame {
         manageAccBtn.setText("<html>Manage<br>Account</html>");
         manageAccBtn.setBorderPainted(false);
         manageAccBtn.setOpaque(false);
+        manageAccBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageAccBtnActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -570,6 +582,16 @@ public class TechnicianPage extends javax.swing.JFrame {
         this.setVisible(false);
         manageFeedbackPage = new ManageFeedbackPage();
     }//GEN-LAST:event_feedbackBtnActionPerformed
+
+    private void manageAccBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageAccBtnActionPerformed
+        this.setVisible(false);
+        manageAccountPage = new ManageAccountPage();
+    }//GEN-LAST:event_manageAccBtnActionPerformed
+
+    private void paymentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentBtnActionPerformed
+        this.setVisible(false);
+        managePaymentPage = new ManagePaymentPage();
+    }//GEN-LAST:event_paymentBtnActionPerformed
 
     /**
      * @param args the command line arguments

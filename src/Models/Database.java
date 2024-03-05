@@ -216,6 +216,12 @@ public class Database {
         }
     }
     
+    // payments
+    public static Payment[] getPayments() {
+        Payment[] arrayPayments = new Payment[] {};
+        return payments.toArray(arrayPayments);
+    }
+    
     
 
 }

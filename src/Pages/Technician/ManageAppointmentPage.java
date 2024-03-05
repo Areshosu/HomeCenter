@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -39,20 +40,30 @@ public class ManageAppointmentPage extends javax.swing.JFrame implements WithCon
         initComponents();
         this.setVisible(true);
         DefaultComboBoxModel customers = new DefaultComboBoxModel();
-        DefaultComboBoxModel services = new DefaultComboBoxModel();
+        DefaultComboBoxModel serviceModels = new DefaultComboBoxModel();
         for (User user: Database.getUsers()) {
             if (user.getRole().equals("customer")) {
                 customers.addElement(user);
             }
         }
-        for (Service service: Database.getServices()) {
+        
+
+        Service[] services = Arrays.stream(Database.getServices())
+                                .filter(svc -> svc.getTechnicianEmail().equals(LoginPage.technicianPage.getLoginEmail()))
+                                .toArray(Service[]::new);
+        
+        for (Service service: services) {
             if (service.getTechnicianEmail().equals(LoginPage.technicianPage.getLoginEmail())) {
-                services.addElement(service);
+                serviceModels.addElement(service);
             }
         }
         
+        User[] users = Arrays.stream(Database.getUsers())
+                                .filter(usr -> usr.getRole().equals("customer"))
+                                .toArray(User[]::new);
+        
         custEmailField.setModel(customers);
-        serviceNameField.setModel(services);
+        serviceNameField.setModel(serviceModels);
         
         appointmentTable.setSelectionModel(new DeselectOnReselectModel());
         appointmentTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -73,8 +84,8 @@ public class ManageAppointmentPage extends javax.swing.JFrame implements WithCon
                     
                     Service selectedService = Database.findService(appointmentTable.getValueAt(appointmentTable.getSelectedRow(), 0).toString());
                     User selectedCust = Database.findUser(appointmentTable.getValueAt(appointmentTable.getSelectedRow(), 1).toString());
-                    serviceNameField.setSelectedIndex(SharedHelper.indexOf(Database.getServices(), selectedService));
-                    custEmailField.setSelectedIndex(SharedHelper.indexOf(Database.getUsers(), selectedCust));
+                    serviceNameField.setSelectedIndex(SharedHelper.indexOf(services, selectedService));
+                    custEmailField.setSelectedIndex(SharedHelper.indexOf(users, selectedCust));
                     startDateField.setText(appointmentTable.getValueAt(appointmentTable.getSelectedRow(), 2).toString());
                     endDateField.setText(appointmentTable.getValueAt(appointmentTable.getSelectedRow(), 3).toString());                  
                     }
@@ -159,6 +170,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame implements WithCon
         jPanel1.setBackground(new java.awt.Color(35, 57, 91));
 
         appointmentTable.setBackground(new java.awt.Color(64, 110, 142));
+        appointmentTable.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
         appointmentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -186,7 +198,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame implements WithCon
         serviceNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         serviceNameLabel.setText("SERVICE NAME");
 
-        startDateField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        startDateField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         startDateField.setText("eg. (12/03/2005, 5:10PM)");
         startDateField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -214,7 +226,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame implements WithCon
         startDateLabel.setForeground(new java.awt.Color(255, 255, 255));
         startDateLabel.setText("STARTING DATE");
 
-        endDateField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        endDateField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         endDateField.setText("eg. (12/03/2005, 5:10PM)");
         endDateField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -253,7 +265,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame implements WithCon
         formMessage.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
         formMessage.setForeground(new java.awt.Color(255, 0, 0));
 
-        serviceNameField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        serviceNameField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         serviceNameField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         custEmailField.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N

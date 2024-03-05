@@ -42,9 +42,9 @@ customer
 
 techni
 aaa
-0
+0167897844
 tech@gmail.com
-null
+Alexsama house lmao
 technician
 
 New User :D
@@ -67,4 +67,18 @@ aaa
 admin@gmail.com
 hh
 manager
+
+New User :D
+password
+0123456789
+qwealoysious@gmail.com
+
+customer
+
+New User :D
+password
+0123456789
+haloysious@gmail.com
+
+customer
 

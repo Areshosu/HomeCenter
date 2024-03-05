@@ -53,8 +53,7 @@ public class ManageAppointmentPage extends javax.swing.JFrame {
                     selectedRowIndex = appointmentTable.getSelectedRow();
                     
                     String service = appointmentTable.getValueAt(selectedRowIndex, 0).toString();
-                    String[] services = Arrays.stream(Database.getServices()).map(Service::toString).toArray(String[]::new);
-                    serviceNameField.setSelectedIndex(SharedHelper.indexOf(services, service));
+                    serviceNameField.setSelectedIndex(SharedHelper.indexOf(Database.getServices(), Database.findService(service)));
                     String customerEmail = appointmentTable.getValueAt(selectedRowIndex, 1).toString();
                     String[] customerEmails = Arrays.stream(Database.getUsers()).filter(user -> user.getRole().equals("customer")).map(User::toString).toArray(String[]::new);
                     String technicianEmail = appointmentTable.getValueAt(selectedRowIndex, 2).toString();
