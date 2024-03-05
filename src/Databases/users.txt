@@ -33,7 +33,7 @@ alex@gmail.com
 new address
 manager
 
-yyyhao0422
+yyyhao0422x
 1q2w3E*
 0
 null
@@ -50,13 +50,6 @@ technician
 New User :D
 aaa
 60123456789
-yyh@gmail.com
-hyy
-customer
-
-New User :D
-aaa
-60123456789
 techni@gmail.com
 hoooo
 technician
@@ -67,4 +60,11 @@ aaa
 admin@gmail.com
 hh
 manager
+
+New User :D
+a
+we
+a
+hoho
+customer
 

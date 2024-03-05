@@ -17,17 +17,28 @@ public class Appointment {
     private String technicianEmail;
     private LocalDateTime startingDateTime;
     private LocalDateTime endingDateTime;
+    private String status;
     
     public Appointment(String serviceName,
                         String customerEmail,
                         String technicianEmail,
                         LocalDateTime startingDateTime,
-                        LocalDateTime endingDateTime) {
+                        LocalDateTime endingDateTime,
+                        String status) {
         this.serviceName = serviceName;
         this.customerEmail = customerEmail;
         this.technicianEmail = technicianEmail;
         this.startingDateTime = startingDateTime;
         this.endingDateTime = endingDateTime;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getServiceName() {

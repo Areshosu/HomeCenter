@@ -10,7 +10,9 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 
 /**
@@ -57,7 +59,8 @@ public class Database {
                     String technicianEmail = input.nextLine();
                     LocalDateTime startingDateTime = SharedHelper.isValidDateTime(input.nextLine());
                     LocalDateTime endingDateTime = SharedHelper.isValidDateTime(input.nextLine());
-                    appointments.add(new Appointment(serviceName, customerEmail, technicianEmail, startingDateTime, endingDateTime));
+                    String status = input.nextLine();
+                    appointments.add(new Appointment(serviceName, customerEmail, technicianEmail, startingDateTime, endingDateTime,status));
                 } else if (dbname == "payments") {
                     double amount = Double.parseDouble(input.nextLine());
                     String paymentOption = input.nextLine();
@@ -85,6 +88,50 @@ public class Database {
         return System.getProperty("user.dir") + "/src/" + dirPrefix;
     }
     
+    //payments
+    public static Payment[] getPayments(){
+        Payment[] arrayPayment = new Payment[] {};
+        return payments.toArray(arrayPayment);
+    }
+    
+    public static Payment[] getPaymentsCustomer(String email){
+        
+        
+        List<Payment> customerPayments = new ArrayList<>();
+        for(Payment payment: payments){
+            if (payment.getSenderEmail().equals(email)){
+                customerPayments.add(payment);
+                
+            }
+        }
+         Payment[] paymentArray = new Payment[customerPayments.size()];
+         paymentArray = customerPayments.toArray(paymentArray);
+    
+         return paymentArray;
+    }
+    
+    public static void addPayment(Payment payment){
+        payments.add(payment);
+    }
+    
+    public static void writeToPayments() {
+        try {
+            PrintWriter output = new PrintWriter(getDBFolder() + "payments.txt");
+            for (Payment payment:payments) {
+                output.println(payment.getAmount());
+                output.println(payment.getPaymentOption());
+                output.println(payment.getSenderEmail());
+                output.println(payment.getReceiverEmail());              
+                output.println();
+            }
+            output.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Database Error " + ex.getMessage());
+        }
+    }
+    
+    
+    
     // users
     
     public static User[] getUsers() {
@@ -109,8 +156,18 @@ public class Database {
         users.set(index, user);
     }
     
-    public static void removeUser(String username) {
-        users.removeIf(user -> user.getUserName().equals(username));
+    public static void updateUser(User userToUpdate, String email) {
+        for(User user : users){
+            if(user.getEmailAddress().equals(email)){
+                user = userToUpdate;
+                return;
+            }
+        }
+    }
+    
+    
+    public static void removeUser(String emailAddress) {
+        users.removeIf(user -> user.getEmailAddress().equals(emailAddress));
     }
     
     public static void writeToUsers() {
@@ -136,6 +193,7 @@ public class Database {
         Service[] arrayService = new Service[] {};
         return services.toArray(arrayService);
     }
+    
     
     public static Service findService(String title){
         for (Service service: services){
@@ -187,6 +245,34 @@ public class Database {
         return appointments.toArray(arrayAppointments);
     }
     
+    public static Appointment[] findAppointmentsCustomer(String email){
+        
+        List<Appointment> customerAppointments = new ArrayList<>();
+        for(Appointment appointment: appointments){
+            if (appointment.getCustomerEmail().equals(email)){
+                customerAppointments.add(appointment);
+                
+            }
+        }
+         Appointment[] appointmentsArray = new Appointment[customerAppointments.size()];
+         appointmentsArray = customerAppointments.toArray(appointmentsArray);
+    
+         return appointmentsArray;
+    }
+    
+    public static Appointment[] findAppointmentsTechnician(String email){
+        
+        List<Appointment> technicianAppointments = new ArrayList<>();
+        for(Appointment appointment: appointments){
+            if (appointment.getTechnicianEmail().equals(email)){
+                technicianAppointments.add(appointment);   
+            }
+        }
+         Appointment[] appointmentsArray = new Appointment[technicianAppointments.size()];
+         appointmentsArray = technicianAppointments.toArray(appointmentsArray);
+         return appointmentsArray;
+    }
+    
     public static void addAppointment(Appointment appointment) {
         appointments.add(appointment);
     }
@@ -208,6 +294,7 @@ public class Database {
                 output.println(appointment.getTechnicianEmail());
                 output.println(SharedHelper.dateToString(appointment.getStartingDateTime()));
                 output.println(SharedHelper.dateToString(appointment.getEndingDateTime()));
+                output.println(appointment.getStatus());
                 output.println();
             }
             output.close();

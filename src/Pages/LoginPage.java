@@ -203,6 +203,7 @@ public class LoginPage extends javax.swing.JFrame {
             if (user.getRole().equals("customer")){
                 customerPage = new CustomerPage();
                 customerPage.setVisible(true);
+                customerPage.setLoginEmail(user.getEmailAddress());
                 this.setVisible(false);
             }else if (user.getRole().equals("technician")){
                 technicianPage = new TechnicianPage();
