@@ -17,7 +17,7 @@ public class Payment {
         "Credit card",
         "Cash"
     };
-    
+
     private double amount;
     private String paymentOption;
     private String senderEmail;

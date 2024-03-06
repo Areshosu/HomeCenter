@@ -135,6 +135,7 @@ public class ManageServicePage extends javax.swing.JFrame {
         });
         serviceTable.setGridColor(new java.awt.Color(64, 110, 142));
         serviceTable.setPreferredSize(new java.awt.Dimension(300, 365));
+        serviceTable.setRowHeight(30);
         jScrollPane1.setViewportView(serviceTable);
 
         titleLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N

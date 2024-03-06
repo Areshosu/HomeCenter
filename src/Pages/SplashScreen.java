@@ -30,7 +30,7 @@ public class SplashScreen extends javax.swing.JFrame {
                 self.setVisible(false);
                 HomeAppService.loginPage.setVisible(true);
             }
-        }, 3000);
+        }, 3500);
     }
 
     /**

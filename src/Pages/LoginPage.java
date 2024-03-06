@@ -19,6 +19,7 @@ public class LoginPage extends javax.swing.JFrame {
     public static ManagerPage managerPage;
     public static CustomerPage customerPage;
     public static TechnicianPage technicianPage;
+    public static RegisterPage registerPage;
     
     /**
      * Creates new form LoginPage
@@ -121,6 +122,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         loginBtn.setBackground(new java.awt.Color(64, 110, 142));
         loginBtn.setFont(new java.awt.Font("Perpetua Titling MT", 0, 11)); // NOI18N
+        loginBtn.setForeground(new java.awt.Color(255, 255, 255));
         loginBtn.setText("LOGIN");
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,6 +133,11 @@ public class LoginPage extends javax.swing.JFrame {
         signupLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 11)); // NOI18N
         signupLabel.setText("New here? Sign up now");
         signupLabel.setToolTipText("");
+        signupLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signupLabelMouseClicked(evt);
+            }
+        });
 
         formMessage.setFont(new java.awt.Font("Perpetua Titling MT", 0, 11)); // NOI18N
         formMessage.setForeground(new java.awt.Color(255, 51, 51));
@@ -222,6 +229,11 @@ public class LoginPage extends javax.swing.JFrame {
             formMessage.setText("Invalid username or password");
         }
     }//GEN-LAST:event_loginBtnActionPerformed
+
+    private void signupLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signupLabelMouseClicked
+        this.setVisible(false);
+        registerPage = new RegisterPage();
+    }//GEN-LAST:event_signupLabelMouseClicked
 
     /**
      * @param args the command line arguments
