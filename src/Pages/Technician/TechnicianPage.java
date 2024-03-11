@@ -5,7 +5,13 @@
  */
 package Pages.Technician;
 
+import Models.Appointment;
+import Models.Payment;
+import Models.Database;
 import homeappservice.HomeAppService;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -33,6 +39,73 @@ public class TechnicianPage extends javax.swing.JFrame {
      */
     public TechnicianPage() {
         initComponents();
+    }
+    
+    @Override
+    public void setVisible(boolean b) {
+        super.setVisible(b);
+        
+        // report statistics >:)
+        LocalDateTime currentDT = LocalDateTime.now();
+        int currentMonth = currentDT.getMonthValue();
+        int currentYear = currentDT.getYear();
+        Payment[] technicianIncome = Arrays.stream(Database.getPayments())
+                                        .filter(trx -> trx.getReceiverEmail().equals(loginEmail) && trx.getPaymentCreatedAt().getYear() == currentYear)
+                                        .toArray(Payment[]::new);
+        
+        String currentMonthSales = getMonthSales(technicianIncome, currentMonth);
+        
+        double currentYearSales = Arrays.stream(technicianIncome)
+                                            .mapToDouble(Payment::getAmount)
+                                            .sum();
+        
+        String januarySales = getMonthSales(technicianIncome, 1);
+        String februarySales = getMonthSales(technicianIncome, 2);
+        String marchSales = getMonthSales(technicianIncome, 3);
+        String aprilSales = getMonthSales(technicianIncome, 4);
+        String maySales = getMonthSales(technicianIncome, 5);
+        String juneSales = getMonthSales(technicianIncome, 6);
+        String julySales = getMonthSales(technicianIncome, 7);
+        String augustSales = getMonthSales(technicianIncome, 8);
+        String septemberSales = getMonthSales(technicianIncome, 9);
+        String octoberSales = getMonthSales(technicianIncome, 10);
+        String novemberSales = getMonthSales(technicianIncome, 11);
+        String decemberSales = getMonthSales(technicianIncome, 12);
+        
+        leftContentLabel.setText("RM " + currentMonthSales);
+        rightContentLabel.setText("RM " + String.format("%.2f", currentYearSales));
+        janField.setText("RM " + januarySales);
+        febField.setText("RM " + februarySales);
+        marchField.setText("RM " + marchSales);
+        aprilField.setText("RM " + aprilSales);
+        mayField.setText("RM " + maySales);
+        juneField.setText("RM " + juneSales);
+        julyField.setText("RM " + julySales);
+        augField.setText("RM " + augustSales);
+        sepField.setText("RM " + septemberSales);
+        octField.setText("RM " + octoberSales);
+        novField.setText("RM " + novemberSales);
+        decField.setText("RM " + decemberSales);
+        
+        String[] columns = {"Service Name", "Customer Email", "Starting Date Time", "Ending Date Time"};
+        DefaultTableModel appointmentTableModel = new DefaultTableModel(columns, 0);
+        for (Appointment appointment: Database.getAppointments()) {
+            appointmentTableModel.addRow(new Object[] {
+                appointment.getServiceName(),
+                appointment.getCustomerEmail(),
+                appointment.getStartingDateTime(),
+                appointment.getEndingDateTime()
+            });
+        }
+        appointmentsTable.setModel(appointmentTableModel);
+    }
+    
+    private String getMonthSales(Payment[] payments, int month) {
+        double income = Arrays.stream(payments)
+                                .filter(trx -> trx.getPaymentCreatedAt().getMonthValue() == month)
+                                .mapToDouble(Payment::getAmount)
+                                .sum();
+        return String.format("%.2f", income);
     }
 
     /**

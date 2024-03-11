@@ -66,7 +66,8 @@ public class Database {
                     String paymentOption = input.nextLine();
                     String senderEmail = input.nextLine();
                     String receiverEmail = input.nextLine();
-                    payments.add(new Payment(amount, paymentOption, senderEmail, receiverEmail));
+                    LocalDateTime paymentCreatedAt = SharedHelper.isValidDateTime(input.nextLine());
+                    payments.add(new Payment(amount, paymentOption, senderEmail, receiverEmail, paymentCreatedAt));
                 } else if (dbname == "feedbacks") {
                     String senderEmail = input.nextLine();
                     String receiverEmail = input.nextLine();

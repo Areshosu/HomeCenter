@@ -170,7 +170,7 @@ public class MakePaymentPage extends javax.swing.JFrame {
         Appointment newAppointment = new Appointment(service,customerEmail,techinicianEmail,startingTime,enddingTime,"pending");
         Database.addAppointment(newAppointment);
         Database.writeToAppointments();
-        Payment newPayment = new Payment(Double.parseDouble(price),"Online banking fpx",customerEmail,techinicianEmail);
+        Payment newPayment = new Payment(Double.parseDouble(price),"Online banking fpx",customerEmail,techinicianEmail, LocalDateTime.now());
         Database.addPayment(newPayment);
         Database.writeToPayments();
         formMessage.setText("Payment sucess!");

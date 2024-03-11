@@ -5,6 +5,8 @@
  */
 package Models;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author sphal
@@ -22,15 +24,18 @@ public class Payment {
     private String paymentOption;
     private String senderEmail;
     private String receiverEmail;
+    private LocalDateTime paymentCreatedAt;
     
     public Payment(double amount,
                     String paymentOption,
                     String senderEmail,
-                    String receiverEmail) {
+                    String receiverEmail,
+                    LocalDateTime paymentCreatedAt) {
         this.amount = amount;
         this.paymentOption = paymentOption;
         this.senderEmail = senderEmail;
         this.receiverEmail = receiverEmail;
+        this.paymentCreatedAt = paymentCreatedAt;
     }
 
     public double getAmount() {
@@ -64,6 +69,12 @@ public class Payment {
     public void setReceiverEmail(String receiverEmail) {
         this.receiverEmail = receiverEmail;
     }
-    
-    
+
+    public LocalDateTime getPaymentCreatedAt() {
+        return paymentCreatedAt;
+    }
+
+    public void setPaymentCreatedAt(LocalDateTime paymentCreatedAt) {
+        this.paymentCreatedAt = paymentCreatedAt;
+    }
 }
