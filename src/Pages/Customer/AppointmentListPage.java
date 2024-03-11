@@ -7,6 +7,11 @@ package Pages.Customer;
 
 import Models.Appointment;
 import Models.Database;
+import java.awt.Color;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,15 +24,38 @@ public class AppointmentListPage extends javax.swing.JFrame {
      * Creates new form AppointmentListPage
      */
     public String email;
+    private int selectedRowIndex;
     
     public void setLoginEmail(String email) {
         this.email = email;
     }
     
+    public Object[] selectedData;
+    
     
     
     public AppointmentListPage() {
-        initComponents();       
+        initComponents();
+        appointmentTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e){
+                if (!e.getValueIsAdjusting()) { // Ensure the event is not still adjusting
+                    int selectedRow = appointmentTable.getSelectedRow();
+                    if (selectedRow != -1) { // Check if any row is selected
+                        // Retrieve the row data from the table model
+                        Object[] rowData = new Object[appointmentTable.getColumnCount()];
+                        for (int i = 0; i < rowData.length; i++) {
+                            rowData[i] = appointmentTable.getValueAt(selectedRow, i);
+                        }
+                        // Now you have access to the rowData array representing the selected row
+                        // You can perform any action with it
+                        selectedData = rowData; 
+                        selectedRowIndex = appointmentTable.getSelectedRow();
+                        
+                    }
+                }
+            }
+        });
     }
     
     public void populateAppointmentTable(){
@@ -36,7 +64,7 @@ public class AppointmentListPage extends javax.swing.JFrame {
             
         Appointment[] appoinments = Database.findAppointmentsCustomer(email);
 
-        String[] columns = {"Service Name","Cust email","Start DateTime","End DateTime"};
+        String[] columns = {"Service Name","Cust email","Start DateTime","End DateTime","Status"};
         DefaultTableModel appointmentTableModel = new DefaultTableModel(columns,0);
         
         for (Appointment appoinment: appoinments){
@@ -44,7 +72,8 @@ public class AppointmentListPage extends javax.swing.JFrame {
                 appoinment.getServiceName(),
                 appoinment.getCustomerEmail(),
                 appoinment.getStartingDateTime(),
-                appoinment.getEndingDateTime(),              
+                appoinment.getEndingDateTime(), 
+                appoinment.getStatus(),
             });
         }
         
@@ -68,6 +97,8 @@ public class AppointmentListPage extends javax.swing.JFrame {
         bluePanel = new javax.swing.JScrollPane();
         appointmentTable = new javax.swing.JTable();
         handleExit = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        formMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,7 +108,7 @@ public class AppointmentListPage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Service Name", "Cust Email", "Start DateTime", "End DateTime"
+                "Service Name", "Cust Email", "Start DateTime", "End DateTime", "Status"
             }
         ));
         appointmentTable.setGridColor(new java.awt.Color(64, 110, 142));
@@ -92,28 +123,41 @@ public class AppointmentListPage extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Complete");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(bluePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bluePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(handleExit, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(handleExit, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(formMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bluePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(bluePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(formMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(handleExit, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,6 +167,27 @@ public class AppointmentListPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_handleExitActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        System.out.println(selectedRowIndex);
+        
+         if(selectedData != null){       
+            FeedbackPage feedbackPage = new FeedbackPage();
+            feedbackPage.setVisible(true);
+            feedbackPage.setLoginEmail(email);
+            feedbackPage.setRevieverEmail(selectedData[1].toString());
+            feedbackPage.setSelectedRowIndex(selectedRowIndex);
+            Appointment appointment = new Appointment(selectedData[0].toString(),email,selectedData[1].toString(),LocalDateTime.parse(selectedData[2].toString()),LocalDateTime.parse(selectedData[3].toString()),selectedData[4].toString());
+            feedbackPage.setAppointment(appointment);
+            LocalDateTime currentTime = LocalDateTime.now();
+            feedbackPage.setCreatedDateTime(currentTime);
+        }else{
+            formMessage.setText("Please Select a service !");
+            formMessage.setForeground(Color.red);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,6 +227,8 @@ public class AppointmentListPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable appointmentTable;
     private javax.swing.JScrollPane bluePanel;
+    private javax.swing.JLabel formMessage;
     private javax.swing.JButton handleExit;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

@@ -122,7 +122,8 @@ public class Database {
                 output.println(payment.getAmount());
                 output.println(payment.getPaymentOption());
                 output.println(payment.getSenderEmail());
-                output.println(payment.getReceiverEmail());              
+                output.println(payment.getReceiverEmail());     
+                output.println(payment.getPaymentCreatedAt());
                 output.println();
             }
             output.close();
@@ -239,6 +240,29 @@ public class Database {
         Feedback[] arrayFeedbacks = new Feedback[] {};
         return feedbacks.toArray(arrayFeedbacks);
     }
+    
+    public static void addFeedback(Feedback feedback){
+        feedbacks.add(feedback);
+    }
+    
+    public static void writeToFeedback(){
+        try{
+            PrintWriter output = new PrintWriter(getDBFolder()+"feedbacks.txt");
+            for (Feedback feedback:feedbacks){
+                output.println(feedback.getSenderEmail());
+                output.println(feedback.getReceiverEmail());
+                output.println(feedback.getCreatedDateTime());
+                output.println(feedback.getRating());
+                output.println(feedback.getMessage());
+                output.println();
+            }
+            output.close();
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(null, "Database Error " + ex.getMessage());
+        }
+    }
+    
+    
     
     // appointments
     public static Appointment[] getAppointments() {

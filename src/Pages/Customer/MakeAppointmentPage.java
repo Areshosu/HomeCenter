@@ -41,8 +41,8 @@ public class MakeAppointmentPage extends javax.swing.JFrame {
     }
     
     public void populateAppointmentData(){
-        technicianEmailField.setText(selectedData[0].toString());
-        serviceField.setText(selectedData[1].toString());
+        technicianEmailField.setText(selectedData[1].toString());
+        serviceField.setText(selectedData[0].toString());
     }
     
     public static boolean isTechnicianAvailable(String dateStr, Appointment[] appointments) {
@@ -227,10 +227,11 @@ public class MakeAppointmentPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         MakePaymentPage makePaymentPage = new MakePaymentPage();
         makePaymentPage.setVisible(true);
-        makePaymentPage.setService(selectedData[1].toString());
+        makePaymentPage.setService(selectedData[0].toString());
+        makePaymentPage.setServiceArea(selectedData[3].toString());
         makePaymentPage.setTimeSlot(reqTime);
-        makePaymentPage.setPrice(selectedData[3].toString());
-        makePaymentPage.setTechinicianEmail(selectedData[0].toString());
+        makePaymentPage.setPrice(selectedData[2].toString());
+        makePaymentPage.setTechinicianEmail(selectedData[1].toString());
         makePaymentPage.setCustomerEmail(email);
         makePaymentPage.populatePaymentData();
         this.setVisible(false);
