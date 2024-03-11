@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 
 /**
@@ -123,7 +122,7 @@ public class Database {
                 output.println(payment.getPaymentOption());
                 output.println(payment.getSenderEmail());
                 output.println(payment.getReceiverEmail());     
-                output.println(payment.getPaymentCreatedAt());
+                output.println(SharedHelper.dateToString(payment.getPaymentCreatedAt()));
                 output.println();
             }
             output.close();

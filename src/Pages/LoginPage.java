@@ -214,8 +214,8 @@ public class LoginPage extends javax.swing.JFrame {
                 this.setVisible(false);
             }else if (user.getRole().equals("technician")){
                 technicianPage = new TechnicianPage();
-                technicianPage.setVisible(true);
                 technicianPage.setLoginEmail(user.getEmailAddress());
+                technicianPage.setVisible(true);
                 this.setVisible(false);
             emailField.setText("");
             passwordField.setText("");

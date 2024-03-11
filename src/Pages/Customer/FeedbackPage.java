@@ -32,7 +32,7 @@ public class FeedbackPage extends javax.swing.JFrame {
     }
     
     public void setAppointment (Appointment appointment){
-        this.selectedAppointment = selectedAppointment;
+        this.selectedAppointment = appointment;
     }
     
     public void setRevieverEmail(String email){
@@ -173,9 +173,14 @@ public class FeedbackPage extends javax.swing.JFrame {
         Database.addFeedback(newFeedback);
         Database.writeToFeedback();      
         Database.updateAppointment( selectedAppointment,selectedRowIndex);
+        Database.writeToAppointments();
         
         this.setVisible(false);
         JOptionPane.showMessageDialog(null, "Thanks for your feedback. Hope to see you again !");
+        AppointmentListPage appointmentListPage = new AppointmentListPage();
+        appointmentListPage.setLoginEmail(email);
+        appointmentListPage.populateAppointmentTable();
+        appointmentListPage.setVisible(true);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

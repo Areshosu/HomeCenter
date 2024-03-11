@@ -45,7 +45,7 @@ public class TechnicianPage extends javax.swing.JFrame {
     public void setVisible(boolean b) {
         super.setVisible(b);
         
-        // report statistics >:)
+        // report statistics
         LocalDateTime currentDT = LocalDateTime.now();
         int currentMonth = currentDT.getMonthValue();
         int currentYear = currentDT.getYear();
@@ -437,6 +437,7 @@ public class TechnicianPage extends javax.swing.JFrame {
 
         appointmentsTable.setBackground(new java.awt.Color(22, 25, 37));
         appointmentsTable.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        appointmentsTable.setForeground(new java.awt.Color(255, 255, 255));
         appointmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

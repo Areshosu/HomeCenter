@@ -178,10 +178,11 @@ public class AppointmentListPage extends javax.swing.JFrame {
             feedbackPage.setLoginEmail(email);
             feedbackPage.setRevieverEmail(selectedData[1].toString());
             feedbackPage.setSelectedRowIndex(selectedRowIndex);
-            Appointment appointment = new Appointment(selectedData[0].toString(),email,selectedData[1].toString(),LocalDateTime.parse(selectedData[2].toString()),LocalDateTime.parse(selectedData[3].toString()),selectedData[4].toString());
+            Appointment appointment = new Appointment(selectedData[0].toString(),email,selectedData[1].toString(),LocalDateTime.parse(selectedData[2].toString()),LocalDateTime.parse(selectedData[3].toString()),"Done");
             feedbackPage.setAppointment(appointment);
             LocalDateTime currentTime = LocalDateTime.now();
             feedbackPage.setCreatedDateTime(currentTime);
+            this.setVisible(false);
         }else{
             formMessage.setText("Please Select a service !");
             formMessage.setForeground(Color.red);
