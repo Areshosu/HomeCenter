@@ -75,6 +75,8 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
         feedbackLabel.setText("User Feedbacks");
 
         feedbackTable.setBackground(new java.awt.Color(64, 110, 142));
+        feedbackTable.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        feedbackTable.setForeground(new java.awt.Color(255, 255, 255));
         feedbackTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -100,6 +102,7 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
         });
         feedbackTable.setGridColor(new java.awt.Color(64, 110, 142));
         feedbackTable.setPreferredSize(new java.awt.Dimension(375, 280));
+        feedbackTable.setRowHeight(30);
         jScrollPane1.setViewportView(feedbackTable);
 
         javax.swing.GroupLayout bluePanelLayout = new javax.swing.GroupLayout(bluePanel);

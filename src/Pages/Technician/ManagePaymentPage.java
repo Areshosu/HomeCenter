@@ -74,6 +74,8 @@ public class ManagePaymentPage extends javax.swing.JFrame {
         darkBluePanel.setBackground(new java.awt.Color(22, 25, 37));
 
         paymentTable.setBackground(new java.awt.Color(35, 57, 91));
+        paymentTable.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        paymentTable.setForeground(new java.awt.Color(255, 255, 255));
         paymentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -92,6 +94,7 @@ public class ManagePaymentPage extends javax.swing.JFrame {
         });
         paymentTable.setGridColor(new java.awt.Color(35, 57, 91));
         paymentTable.setPreferredSize(new java.awt.Dimension(300, 235));
+        paymentTable.setRowHeight(30);
         jScrollPane1.setViewportView(paymentTable);
 
         javax.swing.GroupLayout darkBluePanelLayout = new javax.swing.GroupLayout(darkBluePanel);

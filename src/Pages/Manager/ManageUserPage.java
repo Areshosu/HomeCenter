@@ -204,7 +204,8 @@ public class ManageUserPage extends javax.swing.JFrame {
         });
 
         userTable.setBackground(new java.awt.Color(64, 110, 142));
-        userTable.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        userTable.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        userTable.setForeground(new java.awt.Color(255, 255, 255));
         userTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -231,6 +232,7 @@ public class ManageUserPage extends javax.swing.JFrame {
         userTable.setGridColor(new java.awt.Color(64, 110, 142));
         userTable.setMinimumSize(new java.awt.Dimension(80, 0));
         userTable.setPreferredSize(new java.awt.Dimension(385, 435));
+        userTable.setRowHeight(30);
         userTable.setSelectionBackground(new java.awt.Color(142, 168, 195));
         userTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(userTable);

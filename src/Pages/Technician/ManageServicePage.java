@@ -117,6 +117,7 @@ public class ManageServicePage extends javax.swing.JFrame {
 
         serviceTable.setBackground(new java.awt.Color(64, 110, 142));
         serviceTable.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        serviceTable.setForeground(new java.awt.Color(255, 255, 255));
         serviceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

@@ -78,6 +78,7 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
 
         feedbackTable.setBackground(new java.awt.Color(22, 25, 37));
         feedbackTable.setFont(new java.awt.Font("Perpetua Titling MT", 0, 10)); // NOI18N
+        feedbackTable.setForeground(new java.awt.Color(255, 255, 255));
         feedbackTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -88,6 +89,7 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
         ));
         feedbackTable.setGridColor(new java.awt.Color(22, 25, 37));
         feedbackTable.setPreferredSize(new java.awt.Dimension(300, 250));
+        feedbackTable.setRowHeight(30);
         feedbackTableScrollPane.setViewportView(feedbackTable);
 
         headingLabel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 24)); // NOI18N

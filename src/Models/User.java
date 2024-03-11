@@ -23,6 +23,11 @@ public class User {
         "technician"
     };
     
+    private static final String[] statuses = {
+        "pending",
+        "done"
+    };
+    
     public User(String userName,
                     String password,
                     String phoneNumber,
@@ -87,6 +92,10 @@ public class User {
 
     public static String[] getRoles() {
         return roles;
+    }
+
+    public static String[] getStatuses() {
+        return statuses;
     }
     
     @Override
