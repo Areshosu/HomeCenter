@@ -36,7 +36,7 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
         for (Feedback feedback: Database.getFeedbacks()) {
             if (feedback.getReceiverEmail().equals(LoginPage.technicianPage.getLoginEmail())) {
                 feedbackTableModel.addRow(new Object[] {
-                    feedback.getReceiverEmail(),
+                    feedback.getSenderEmail(),
                     feedback.getRating(),
                     feedback.getMessage(),
                     feedback.getCreatedDateTime()

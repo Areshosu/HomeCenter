@@ -32,7 +32,7 @@ public class ManagePaymentPage extends javax.swing.JFrame {
     
     private void refreshTable() {
         String[] columns = {"Technician Email", "Customer Email", "Payment Option", "Amount"};
-        DefaultTableModel paymentTableModel = new DefaultTableModel();
+        DefaultTableModel paymentTableModel = new DefaultTableModel(columns, 0);
         for (Payment payment: Database.getPayments()) {
             if (payment.getReceiverEmail().equals(LoginPage.technicianPage.getLoginEmail())) {
                 paymentTableModel.addRow(new Object[] {
