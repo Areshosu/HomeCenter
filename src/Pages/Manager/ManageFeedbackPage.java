@@ -57,6 +57,7 @@ public class ManageFeedbackPage extends javax.swing.JFrame {
         feedbackTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Manage Feedback");
 
         bluePanel.setBackground(new java.awt.Color(35, 57, 91));
 

@@ -64,7 +64,7 @@ public class AppointmentListPage extends javax.swing.JFrame {
             
         Appointment[] appoinments = Database.findAppointmentsCustomer(email);
 
-        String[] columns = {"Service Name","Cust email","Start DateTime","End DateTime","Status"};
+        String[] columns = {"Service Name","Cust email","Start DateTime","End DateTime","Status", "Tech Email"};
         DefaultTableModel appointmentTableModel = new DefaultTableModel(columns,0);
         
         for (Appointment appoinment: appoinments){
@@ -74,6 +74,7 @@ public class AppointmentListPage extends javax.swing.JFrame {
                 appoinment.getStartingDateTime(),
                 appoinment.getEndingDateTime(), 
                 appoinment.getStatus(),
+                appoinment.getTechnicianEmail()
             });
         }
         
@@ -176,7 +177,7 @@ public class AppointmentListPage extends javax.swing.JFrame {
             FeedbackPage feedbackPage = new FeedbackPage();
             feedbackPage.setVisible(true);
             feedbackPage.setLoginEmail(email);
-            feedbackPage.setRevieverEmail(selectedData[1].toString());
+            feedbackPage.setRevieverEmail(selectedData[5].toString());
             feedbackPage.setSelectedRowIndex(selectedRowIndex);
             Appointment appointment = new Appointment(selectedData[0].toString(),email,selectedData[1].toString(),LocalDateTime.parse(selectedData[2].toString()),LocalDateTime.parse(selectedData[3].toString()),"Done");
             feedbackPage.setAppointment(appointment);
