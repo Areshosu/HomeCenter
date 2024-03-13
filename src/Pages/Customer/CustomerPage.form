@@ -36,7 +36,7 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="DeleteAccountButton" max="32767" attributes="0"/>
                   <Component id="UpdatePasswordButton1" max="32767" attributes="0"/>
-                  <Component id="ServiceHistoryButton1" max="32767" attributes="0"/>
+                  <Component id="appointmentListButton" max="32767" attributes="0"/>
                   <Component id="CheckServiceButton1" max="32767" attributes="0"/>
                   <Component id="jLabel1" pref="441" max="32767" attributes="0"/>
                   <Component id="PaymentHistoryButton" alignment="0" max="32767" attributes="0"/>
@@ -56,7 +56,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="CheckServiceButton1" min="-2" pref="33" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="ServiceHistoryButton1" min="-2" pref="33" max="-2" attributes="0"/>
+              <Component id="appointmentListButton" min="-2" pref="33" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="PaymentHistoryButton" min="-2" pref="33" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
@@ -125,12 +125,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CheckServiceButton1ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="ServiceHistoryButton1">
+    <Component class="javax.swing.JButton" name="appointmentListButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Services History"/>
+        <Property name="text" type="java.lang.String" value="Appointment List"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ServiceHistoryButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="appointmentListButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="UpdatePasswordButton1">

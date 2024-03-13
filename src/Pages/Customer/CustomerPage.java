@@ -5,8 +5,7 @@
  */
 package Pages.Customer;
 
-import Pages.MainMenuPage;
-import java.awt.event.ActionEvent;
+import homeappservice.HomeAppService;
 
 /**
  *
@@ -15,13 +14,25 @@ import java.awt.event.ActionEvent;
 public class CustomerPage extends javax.swing.JFrame {
     
     
-    
+    private String loginEmail;
+    public static DeleteConfirmationPage deleteConfirmationPage;
+    public static UpdatePasswordPage updatePasswordPage;
+    public static UpdateAccountDetailPage updateAccountDetailPage;
+    public static CheckServicePage checkServicePage;
 
     /**
      * Creates new form NewJFrame
      */
     public CustomerPage() {
         initComponents();
+    }
+    
+    public String getLoginEmail() {
+        return loginEmail;
+    }
+
+    public void setLoginEmail(String loginEmail) {
+        this.loginEmail = loginEmail;
     }
 
     /**
@@ -40,7 +51,7 @@ public class CustomerPage extends javax.swing.JFrame {
         DeleteAccountButton = new javax.swing.JButton();
         PaymentHistoryButton = new javax.swing.JButton();
         CheckServiceButton1 = new javax.swing.JButton();
-        ServiceHistoryButton1 = new javax.swing.JButton();
+        appointmentListButton = new javax.swing.JButton();
         UpdatePasswordButton1 = new javax.swing.JButton();
         UpdateAccountDetailsButton1 = new javax.swing.JButton();
 
@@ -86,10 +97,10 @@ public class CustomerPage extends javax.swing.JFrame {
             }
         });
 
-        ServiceHistoryButton1.setText("Services History");
-        ServiceHistoryButton1.addActionListener(new java.awt.event.ActionListener() {
+        appointmentListButton.setText("Appointment List");
+        appointmentListButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ServiceHistoryButton1ActionPerformed(evt);
+                appointmentListButtonActionPerformed(evt);
             }
         });
 
@@ -119,7 +130,7 @@ public class CustomerPage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(DeleteAccountButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(UpdatePasswordButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ServiceHistoryButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(appointmentListButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(CheckServiceButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
                     .addComponent(PaymentHistoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -136,7 +147,7 @@ public class CustomerPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(CheckServiceButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ServiceHistoryButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(appointmentListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PaymentHistoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
@@ -161,31 +172,53 @@ public class CustomerPage extends javax.swing.JFrame {
     private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new MainMenuPage();
+        HomeAppService.loginPage.setVisible(true);
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
     private void PaymentHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentHistoryButtonActionPerformed
         // TODO add your handling code here:
+        PaymentHistoryPage paymentHistoryPage = new PaymentHistoryPage();
+        paymentHistoryPage.setVisible(true);
+        paymentHistoryPage.setLoginEmail(loginEmail);
+        paymentHistoryPage.populatePaymentData();
     }//GEN-LAST:event_PaymentHistoryButtonActionPerformed
 
     private void CheckServiceButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckServiceButton1ActionPerformed
         // TODO add your handling code here:
+        CheckServicePage checkServicePage = new CheckServicePage();
+        checkServicePage.setVisible(true);
+        checkServicePage.setLoginEmail(loginEmail);
     }//GEN-LAST:event_CheckServiceButton1ActionPerformed
 
-    private void ServiceHistoryButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceHistoryButton1ActionPerformed
+    private void appointmentListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentListButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ServiceHistoryButton1ActionPerformed
+        AppointmentListPage appointmentListPage = new AppointmentListPage();
+        appointmentListPage.setLoginEmail(loginEmail);
+        appointmentListPage.populateAppointmentTable();
+        appointmentListPage.setVisible(true);
+        
+    }//GEN-LAST:event_appointmentListButtonActionPerformed
 
     private void DeleteAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteAccountButtonActionPerformed
         // TODO add your handling code here:
+       DeleteConfirmationPage deleteConfirmationPage = new DeleteConfirmationPage();
+       deleteConfirmationPage.setVisible(true);
+       deleteConfirmationPage.setLoginEmail(loginEmail);
+       
     }//GEN-LAST:event_DeleteAccountButtonActionPerformed
 
     private void UpdatePasswordButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdatePasswordButton1ActionPerformed
         // TODO add your handling code here:
+        UpdatePasswordPage updatePasswordPage = new UpdatePasswordPage();
+        updatePasswordPage.setVisible(true);
+        updatePasswordPage.setLoginEmail(loginEmail);
     }//GEN-LAST:event_UpdatePasswordButton1ActionPerformed
 
     private void UpdateAccountDetailsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateAccountDetailsButton1ActionPerformed
         // TODO add your handling code here:
+        UpdateAccountDetailPage updateAccountDetailPage = new UpdateAccountDetailPage();
+        updateAccountDetailPage.setVisible(true);
+        updateAccountDetailPage.setLoginEmail(loginEmail);
     }//GEN-LAST:event_UpdateAccountDetailsButton1ActionPerformed
 
     /**
@@ -230,9 +263,9 @@ public class CustomerPage extends javax.swing.JFrame {
     private javax.swing.JButton ExitButtton;
     private javax.swing.JButton LogoutButton;
     private javax.swing.JButton PaymentHistoryButton;
-    private javax.swing.JButton ServiceHistoryButton1;
     private javax.swing.JButton UpdateAccountDetailsButton1;
     private javax.swing.JButton UpdatePasswordButton1;
+    private javax.swing.JButton appointmentListButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
